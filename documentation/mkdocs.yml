@@ -1,0 +1,29 @@
+site_name: Enhanced Networked Monographs Documentation
+dev_addr: 0.0.0.0:8001
+
+pages:
+  - Home: index.md
+  - 'Getting Started': 
+      - Installation: installation.md
+      - Setup: setup.md
+      - 'Adding New Epubs': new.md
+  - API:
+      - Overview: 'api/overview.md'
+      - Topics: 'api/topics.md'
+      - Sources: 'api/sources.md'
+  - Acknowledgements: credits.md
+
+theme: 'material'
+
+extra:
+  logo: 'images/Logo.png'
+
+extra_css:
+  - 'stylesheets/otl_docs.css'
+
+site_favicon: 'images/favicon.ico'
+
+markdown_extensions:
+    - toc
+    - admonition
+    - codehilite(guess_lang=false)

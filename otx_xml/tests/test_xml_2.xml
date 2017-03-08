@@ -1,0 +1,24 @@
+<document>
+    <description>
+        <title>Artists I Loathe</title>
+        <author>Matt Nishi-Broach</author>
+    </description>
+    <content>
+        <artist id="1">
+            <name>Jeff Koons</name>
+            <description>Sculptor and Painter obsessed with banality</description>
+            <tag>Sculpture</tag>
+            <tag>Painting</tag>
+            <tag>20th Century</tag>
+        </artist>
+
+        <artist id="2">
+            <name>Cy Twombly</name>
+            <description>Artist working to find narrative strains within abstract expressionism</description>
+            <tag>Painting</tag>
+            <tag>20th Century</tag>
+            <tag>Abstract Expressionism</tag>
+        </artist>
+
+    </content>
+</document>

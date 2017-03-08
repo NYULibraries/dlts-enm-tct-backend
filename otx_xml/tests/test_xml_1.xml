@@ -1,0 +1,35 @@
+<document>
+    <metadata>
+        <data id="title">Artists I Love</data>
+        <data id="author">Matt Nishi-Broach</data>
+    </metadata>
+    <content>
+        <artist id="1">
+            <name>Joseph Cornell</name>
+            <description>Surrealist sculptor and collagist.  Fantastic diarama artist</description>
+            <tag>Sculpture</tag>
+            <tag>20th Century</tag>
+            <tag>Surrealist</tag>
+            <tag>New York City</tag>
+        </artist>
+
+        <artist id="2">
+            <name>James Turrel</name>
+            <description>California Light and Space artist.  Made my favorite artwork in NYC ('Meeting', at PS1)</description>
+            <tag>Sculpture</tag>
+            <tag>Installation</tag>
+            <tag>20th Century</tag>
+            <tag>New York City</tag>
+            <tag>California</tag>
+            <tag>Light &amp; Space</tag>
+        </artist>
+
+        <artist id="3">
+            <name>Francisco de Goya y Luciente</name>
+            <description>Spanish painter and printmaker.  Subtly parodied the royalty as a court painter.  Documented the horrors of the Napoleonic Wars in his etchings.  Found the darker side of human Life.</description>
+            <tag>Painter</tag>
+            <tag>18th Century</tag>
+            <tag>Spain</tag>
+        </artist>
+    </content>
+</document>

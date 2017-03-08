@@ -1,0 +1,41 @@
+.md-header {
+  background: #617c84;
+}
+
+table {
+  border-color: #337A9E;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: #337ab7;
+}
+
+.admonition {
+  border-left: 3.2rem solid #faebcc;
+  background-color: #fcf8e3;
+}
+
+.admonition:before {
+  color: rgba(0,0,0,.3);
+}
+
+.admonition.warning {
+  background-color: #f2dede;
+  border-left: 3.2rem solid #b47674;
+}
+
+.md-footer {
+  background-color: #617c84;
+}
+
+.md-footer-nav {
+  background-color: #617c84;
+}
+
+.md-footer-meta {
+  background: rgba(0, 0, 0, .3);
+}
+
+.md-nav--secondary {
+  border-left: .4rem solid #617c84;
+}

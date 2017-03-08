@@ -1,0 +1,30 @@
+from django.conf.urls import url
+from otcore.hit import views
+
+urlpatterns = [
+    url(r'^hits/all/$', views.AllHitsView.as_view()),
+    url(r'^hits/search/$', views.HitSearchView.as_view()),
+    url(r'^hits/bypassed/$', views.BypassedHitsView.as_view()),
+    url(r'^hits/bulkBypass/$', views.BulkBypassView.as_view()),
+    url(r'^hits/bulkUnbypass/$', views.BulkUnbypassView.as_view()),
+    url(r'^hits/update/(?P<pk>\d+)/$', views.HitChangeView.as_view()),
+    url(r'^hits/unhide/(?P<pk>\d+)/$', views.HitUnhideView.as_view()),
+    url(r'^hits/delete/(?P<pk>\d+)/$', views.HitDeleteView.as_view()),
+    url(r'^hits/bypass/(?P<pk>\d+)/$', views.SetHitBypassView.as_view()),
+    url(r'^hits/create/new/$', views.CreateHitView.as_view()),
+    url(r'^hits/disambiguate/$', views.UpdateHitScopesView.as_view()),
+    url(r'^hits/add-by-basket/$', views.AddHit_Main.as_view()),
+    url(r'^hits/add-hit-same-slug/$', views.AddHitWithExistingSlug.as_view()),
+    url(r'^basket/(?P<pk>\d+)/$', views.BasketDetailView.as_view()),
+    url(r'^basket/(?P<pk>\d+)/add-type/$', views.AddTypetoBasketView.as_view()),
+    url(r'^basket/merge/$', views.BasketMergeView.as_view()),
+    url(r'^basket/merge-by-hits/$', views.BulkMergeByHitView.as_view()),
+    url(r'^basket/detach/$', views.DetachView.as_view()),
+    url(r'^basket/all/$', views.BasketListView.as_view()),
+    url(r'^basket/new/$', views.NewBasketView.as_view()),
+    url(r'^basket/search/$', views.BasketSearchView.as_view()),
+    url(r'^scope/all/$', views.ScopeListCreateView.as_view()),
+    url(r'^scope/with-counts/$', views.ScopeListWithCountsView.as_view()),
+    url(r'^scope/new/$', views.ScopeListCreateView.as_view()),
+    url(r'^scope/(?P<pk>\d+)/$', views.SingleScopeView.as_view()),
+]
