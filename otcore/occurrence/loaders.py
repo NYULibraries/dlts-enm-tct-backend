@@ -53,7 +53,6 @@ class URLLoaderWithErrorTracking(BaseLoader):
         from requests import exceptions
 
         try:
-            # page = requests.get(source, allow_redirects=False)
             page = requests.get(source)
         except exceptions.SSLError:
             print("ERROR SSL [Certificate]. For: {}".format(source))
@@ -70,6 +69,7 @@ class URLLoaderWithErrorTracking(BaseLoader):
         try:
             validator(source)
         except ValidationError:
+            print('Validation Error for source: {}'.format(source))
             raise ValidationError(
                 "{} Requires a valid URL as its source. "
                 "{} is not a valid URL"

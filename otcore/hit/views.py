@@ -4,7 +4,7 @@ import django_filters
 from django.db.models import Q, Count
 from django.views.generic.base import TemplateView
 from django.core.exceptions import FieldError
-from rest_framework import generics, status, filters
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -13,7 +13,8 @@ from .forms import add_or_create_from_uiselect
 from otcore.hit.models import Hit, Basket, Scope
 from otcore.hit.serializers import HitSerializer, BasketSerializer, HitListSerializer, \
     HitUpdateSerializer, HitListWithBasketNamesSerializer, HitCreateSerializer, \
-    ScopeSerializer, BasketSimpleSerializer, ScopeWithCountsSerializer, BasketSimpleSerializer
+    ScopeSerializer, BasketSimpleSerializer, ScopeWithCountsSerializer, BasketSimpleSerializer, \
+    BasketListWithCountsSerializer
 from otcore.hit.processing import merge_baskets, detach
 from otcore.relation.models import RelatedBasket
 from otcore.relation.serializers import RelatedBasketSerializer
@@ -78,15 +79,15 @@ class AllHitsView(generics.ListAPIView):
     queryset = Hit.objects.all().select_related('scope').filter(bypass=False)
 
 
-class HitFilter(filters.FilterSet):
-    exclude_basket = django_filters.MethodFilter()
-    name = django_filters.CharFilter(lookup_type='icontains')
-    exclude_type = django_filters.MethodFilter()
+class HitFilter(django_filters.rest_framework.FilterSet):
+    exclude_basket = django_filters.CharFilter(method='filter_exclude_basket')
+    name = django_filters.CharFilter(lookup_expr='icontains')
+    exclude_type = django_filters.CharFilter(method='filter_exclude_type')
     ttype = django_filters.CharFilter(name='basket__types__ttype')
     scope = django_filters.CharFilter(name='scope__scope')
-    letter = django_filters.MethodFilter()
+    letter = django_filters.CharFilter(method='filter_letter')
 
-    def filter_letter(self, queryset, value):
+    def filter_letter(self, queryset, name, value):
         if value == '#':
             queryset = queryset.exclude(name__regex=r'^[\'\"]?[A-Za-z]')
         elif value is not None:
@@ -94,14 +95,14 @@ class HitFilter(filters.FilterSet):
 
         return queryset
 
-    def filter_exclude_type(self, queryset, value):
+    def filter_exclude_type(self, queryset, name, value):
         if value:
             for val in value.split(','):
                 queryset = queryset.exclude(basket__types__ttype=val)
 
         return queryset
 
-    def filter_exclude_basket(self, queryset, value):
+    def filter_exclude_basket(self, queryset, name, value):
         if value:
             values = value.split(',')
             queryset = queryset.exclude(basket_id__in=values)
@@ -110,7 +111,7 @@ class HitFilter(filters.FilterSet):
 
     class Meta:
         model = Hit
-        fields = ('name', 'exclude_basket', 'exclude_type', 'ttype', 'scope')
+        fields = ('name', 'exclude_basket', 'exclude_type', 'ttype', 'scope', 'letter')
 
 
 class HitSearchView(generics.ListAPIView):
@@ -119,7 +120,7 @@ class HitSearchView(generics.ListAPIView):
     # authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny,)
     queryset = Hit.objects.filter(bypass=False).select_related('scope').all()
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     filter_class = HitFilter
 
     def get(self, request, *args, **kwargs):
@@ -271,12 +272,12 @@ class BasketListView(generics.ListAPIView):
     queryset = Basket.objects.all()
 
 
-class BasketFilter(filters.FilterSet):
-    letter = django_filters.MethodFilter()
-    counts = django_filters.MethodFilter()
+class BasketFilter(django_filters.rest_framework.FilterSet):
+    letter = django_filters.CharFilter(method='filter_letter')
+    counts = django_filters.CharFilter(method='filter_counts')
     document = django_filters.NumberFilter('occurs__location__document_id')
 
-    def filter_letter(self, queryset, value):
+    def filter_letter(self, queryset, name, value):
         if value == '#':
             queryset = queryset.exclude(display_name__regex=r'^[\'\"]?[A-Za-z]')
         elif value is not None:
@@ -284,7 +285,7 @@ class BasketFilter(filters.FilterSet):
 
         return queryset
 
-    def filter_counts(self, queryset, value):
+    def filter_counts(self, queryset, name, value):
         if value:
             queryset = queryset.annotate(occurrence_counts=Count('occurs'))
 
@@ -298,7 +299,7 @@ class BasketFilter(filters.FilterSet):
 class BasketSearchView(generics.ListAPIView):
     serializer_class = BasketSimpleSerializer
     queryset = Basket.objects.all()
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     filter_class = BasketFilter
 
     def get_serializer_class(self, *args, **kwargs):

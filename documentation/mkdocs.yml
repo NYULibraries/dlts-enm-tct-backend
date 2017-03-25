@@ -1,4 +1,4 @@
-site_name: Enhanced Networked Monographs Documentation
+site_name: ENM Topic Curation Toolkit Backend Documentation
 dev_addr: 0.0.0.0:8001
 
 pages:
@@ -6,7 +6,10 @@ pages:
   - 'Getting Started': 
       - Installation: installation.md
       - Setup: setup.md
-      - 'Adding New Epubs': new.md
+  - Ingest:
+    - 'Adding A New Epub': new.md
+    - 'Adding A New Indexpattern': indexpatterns.md
+  - Testing: testing.md
   - API:
       - Overview: 'api/overview.md'
       - Topics: 'api/topics.md'

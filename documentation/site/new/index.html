@@ -9,17 +9,17 @@
       
       
       
-        <link rel="shortcut icon" href="../../images/favicon.ico">
+        <link rel="shortcut icon" href="../images/favicon.ico">
       
       <meta name="generator" content="mkdocs+mkdocs-material#1.0.3">
     
     
       
-        <title>Overview - ENM Topic Curation Toolkit Backend Documentation</title>
+        <title>Adding A New Epub - ENM Topic Curation Toolkit Backend Documentation</title>
       
     
     
-      <script src="../../assets/javascripts/modernizr-facb31f4a3.js"></script>
+      <script src="../assets/javascripts/modernizr-facb31f4a3.js"></script>
     
     
       
@@ -32,10 +32,10 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application-f3ab63f78a.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application-f3ab63f78a.css">
       
       
-        <link rel="stylesheet" href="../../stylesheets/otl_docs.css">
+        <link rel="stylesheet" href="../stylesheets/otl_docs.css">
       
     
     
@@ -60,9 +60,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="ENM Topic Curation Toolkit Backend Documentation" class=" md-logo  md-header-nav__button">
+        <a href=".." title="ENM Topic Curation Toolkit Backend Documentation" class=" md-logo  md-header-nav__button">
           
-            <img src="../../images/Logo.png" width="24" height="24">
+            <img src="../images/Logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -75,11 +75,11 @@
             
               
                 <span class="md-header-nav__parent">
-                  API
+                  Ingest
                 </span>
               
             
-            Overview
+            Adding A New Epub
           
         </span>
       </div>
@@ -124,7 +124,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <i class=" md-logo  md-nav__button">
       
-        <img src="../../images/Logo.png">
+        <img src="../images/Logo.png">
       
     </i>
     ENM Topic Curation Toolkit Backend Documentation
@@ -136,7 +136,7 @@
       
   <li class="md-nav__item">
     
-      <a href="../.." title="Home" class="md-nav__link">
+      <a href=".." title="Home" class="md-nav__link">
         Home
       </a>
     
@@ -163,7 +163,7 @@
           
   <li class="md-nav__item">
     
-      <a href="../../installation/" title="Installation" class="md-nav__link">
+      <a href="../installation/" title="Installation" class="md-nav__link">
         Installation
       </a>
     
@@ -174,7 +174,7 @@
           
   <li class="md-nav__item">
     
-      <a href="../../setup/" title="Setup" class="md-nav__link">
+      <a href="../setup/" title="Setup" class="md-nav__link">
         Setup
       </a>
     
@@ -190,7 +190,7 @@
       
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Ingest
@@ -206,69 +206,15 @@
           
   <li class="md-nav__item">
     
-      <a href="../../new/" title="Adding A New Epub" class="md-nav__link">
-        Adding A New Epub
-      </a>
-    
-  </li>
-
-        
-          
-          
-  <li class="md-nav__item">
-    
-      <a href="../../indexpatterns/" title="Adding A New Indexpattern" class="md-nav__link">
-        Adding A New Indexpattern
-      </a>
-    
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-  <li class="md-nav__item">
-    
-      <a href="../../testing/" title="Testing" class="md-nav__link">
-        Testing
-      </a>
-    
-  </li>
-
-    
-      
-      
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
-    
-    <label class="md-nav__link" for="nav-5">
-      API
-    </label>
-    <nav class="md-nav" data-md-component="collapsible">
-      <label class="md-nav__title" for="nav-5">
-        API
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-  <li class="md-nav__item">
-    
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Overview
+        Adding A New Epub
       </label>
     
-    <a href="./" title="Overview" class="md-nav__link md-nav__link--active">
-      Overview
+    <a href="./" title="Adding A New Epub" class="md-nav__link md-nav__link--active">
+      Adding A New Epub
     </a>
     
       
@@ -280,15 +226,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#api-overview" title="API Overview" class="md-nav__link">
-    API Overview
+  <a href="#place-the-epub-in-the-epub_sources-folder" title="Place the EPUB in the EPUB_SOURCES folder" class="md-nav__link">
+    Place the EPUB in the EPUB_SOURCES folder
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-categories" title="API Categories" class="md-nav__link">
-    API Categories
+  <a href="#choose-an-indexpattern-for-the-epub-or-create-a-new-one" title="Choose an Indexpattern for the Epub or create a new one" class="md-nav__link">
+    Choose an Indexpattern for the Epub or create a new one
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#locate-the-index-id-in-the-manifest" title="Locate the Index ID in the manifest" class="md-nav__link">
+    Locate the Index ID in the manifest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parse-the-index" title="Parse the index" class="md-nav__link">
+    Parse the index
   </a>
   
 </li>
@@ -304,7 +264,61 @@
           
   <li class="md-nav__item">
     
-      <a href="../topics/" title="Topics" class="md-nav__link">
+      <a href="../indexpatterns/" title="Adding A New Indexpattern" class="md-nav__link">
+        Adding A New Indexpattern
+      </a>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+  <li class="md-nav__item">
+    
+      <a href="../testing/" title="Testing" class="md-nav__link">
+        Testing
+      </a>
+    
+  </li>
+
+    
+      
+      
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible">
+      <label class="md-nav__title" for="nav-5">
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+  <li class="md-nav__item">
+    
+      <a href="../api/overview/" title="Overview" class="md-nav__link">
+        Overview
+      </a>
+    
+  </li>
+
+        
+          
+          
+  <li class="md-nav__item">
+    
+      <a href="../api/topics/" title="Topics" class="md-nav__link">
         Topics
       </a>
     
@@ -315,7 +329,7 @@
           
   <li class="md-nav__item">
     
-      <a href="../sources/" title="Sources" class="md-nav__link">
+      <a href="../api/sources/" title="Sources" class="md-nav__link">
         Sources
       </a>
     
@@ -331,7 +345,7 @@
       
   <li class="md-nav__item">
     
-      <a href="../../credits/" title="Acknowledgements" class="md-nav__link">
+      <a href="../credits/" title="Acknowledgements" class="md-nav__link">
         Acknowledgements
       </a>
     
@@ -357,15 +371,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#api-overview" title="API Overview" class="md-nav__link">
-    API Overview
+  <a href="#place-the-epub-in-the-epub_sources-folder" title="Place the EPUB in the EPUB_SOURCES folder" class="md-nav__link">
+    Place the EPUB in the EPUB_SOURCES folder
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-categories" title="API Categories" class="md-nav__link">
-    API Categories
+  <a href="#choose-an-indexpattern-for-the-epub-or-create-a-new-one" title="Choose an Indexpattern for the Epub or create a new one" class="md-nav__link">
+    Choose an Indexpattern for the Epub or create a new one
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#locate-the-index-id-in-the-manifest" title="Locate the Index ID in the manifest" class="md-nav__link">
+    Locate the Index ID in the manifest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parse-the-index" title="Parse the index" class="md-nav__link">
+    Parse the index
   </a>
   
 </li>
@@ -383,32 +411,43 @@
                
               
                 
-                  <h1>Overview</h1>
+                  <h1>Adding A New Epub</h1>
                 
-                <h2 id="api-overview">API Overview</h2>
-<p>In order to make this documentation as flexible as possible, all API endpoints are listed relative to the base domain -- for example, the endpoints to get all topics is listed as:</p>
-<div class="codehilite"><pre><span></span>/api/hit/basket/all/
+                <p>This guide assumes that you have already batch ingest a number of EPUBs, and are looking to manually add an additional EPUB.  It will take you through the steps of adding a new EPUB into the system.  If you want to know how to do an initial batch import, please refer to that <a href="../setup#importing-data">section of the setup guide</a>.</p>
+<h2 id="place-the-epub-in-the-epub_sources-folder">Place the EPUB in the EPUB_SOURCES folder</h2>
+<p>The new EPUB should be place in the folder  specified by the attribute <code>EPUB_SOURCES_FOLDER</code> in <code>nyu.production_settings</code>. Once placed, run the following command:</p>
+<div class="codehilite"><pre><span></span>python manage.py add_new_epub EPUB_FILENAME
 </pre></div>
 
 
-<p>If the api were at <code>http://api.enhanced-network-monographs.com</code> (just, to be clear, a totally invented url), the full URL to access the above endpoint would be:</p>
-<div class="codehilite"><pre><span></span>http://api.enhanced-network-monographs.com/api/hit/basket/all
+<p>make sure that you only provide the base EPUB filename, not the full path.  Note that this will merely decompressed the EPUB and load its metadata, it will <strong>not</strong> extract Topics, Names, or Locations.</p>
+<h2 id="choose-an-indexpattern-for-the-epub-or-create-a-new-one">Choose an Indexpattern for the Epub or create a new one</h2>
+<p>The new, decompressed EPUB can be found in the folder specified by the <code>EPUB_DECOMPRESSED_FOLDER</code>.  Open the xhtml files in the EPUB and see if its xhtml structure and index structure match any of the existing Indexpatterns.  </p>
+<p>If you need to create a new Indexpattern to match the current structure, please see <a href="../indexpatterns">our separate guide</a>.  Once the new Indexpatterns is created, be sure to add it to the <code>indexpatterns.json</code> file, and then rerun Indexpattern ingest:</p>
+<div class="codehilite"><pre><span></span>python manage.py loaddata indexpatterns
 </pre></div>
 
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This documentation <strong>only</strong> covers the publicly accessible (i.e. read-only) API Endpoints. API endpoints that actually manipulate the database (such as adding and deleting Topics) require authentication, and can currently only be used via the <strong>Topic Curation Toolkit</strong>.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">IDs and Consistency</p>
-<p>Most objects in the database have an <code>id</code> attribute. IDs are guaranteed to be unique for that particular resource in a database: only one <code>basket</code> object will have an ID of <strong>10</strong>, for example.  However, the system does <strong>not</strong> guarantee that IDs will be consistent across databases.  In other words, if an ingest is done from scratch on a new system (rather than importing a database copy), IDs may not match those from a different ingest.</p>
-</div>
-<h2 id="api-categories">API Categories</h2>
-<ul>
-<li><strong><a href="../topics">Topics</a></strong>: All API endpoints relating to Topics and Names</li>
-<li><strong><a href="../sources">Sources</a></strong>: All API endpoitns relating to Epubs and Pages</li>
-</ul>
+<p>Whether you are creating a new Indexpattern or re-using the older, once you have selected an Indexpattern, add it to the python dictionary in <code>initial/pattern_mapping.py</code>. Make sure the key matches the filename (without the .epub) and the value matches the name of the Indexpattern.  So, for example, for an epub with a filename <em>0123456789999.epub</em> and using the <em>nyup1</em> indexpattern, you'd add the following line to the pattern_mapping dictionary:</p>
+<div class="codehilite"><pre><span></span>    <span class="s1">&#39;0123456789999&#39;</span><span class="p">:</span> <span class="s1">&#39;nyup1&#39;</span><span class="p">,</span>
+</pre></div>
+
+
+<h2 id="locate-the-index-id-in-the-manifest">Locate the Index ID in the manifest</h2>
+<p>Inside the unzipped Epub document, locate the <em>EPUB manifest</em>. This file, usually (but not exclusively) a .opf file, will list the contents and ordering of the EPUB document. Locate the index(es) in the list of <code>&lt;item&gt;</code> tags, and note the id attribute on that tag. That id must be added to the <code>initial/index_ids.py</code> dictionary. The structure is much like that on the <code>pattern_mapping</code> dictionary, so an epub with the filename <em>0123456789999.epub</em> and an index id of <em>ch09index.html</em> would require the following line to the index_ids dictionary:</p>
+<div class="codehilite"><pre><span></span>    <span class="s1">&#39;0123456789999&#39;</span><span class="p">:</span> <span class="s1">&#39;ch09index.html&#39;</span><span class="p">,</span>
+</pre></div>
+
+
+<p>Some books may have separate index files (for example, a subject index and an author index). In those cases, add the multiple indexes as a single comma-separate string, e.g.:</p>
+<div class="codehilite"><pre><span></span>    <span class="s1">&#39;0123456789999&#39;</span><span class="p">:</span> <span class="s1">&#39;ch09s_index.html,ch10a_index.html&#39;</span><span class="p">,</span>
+</pre></div>
+
+
+<h2 id="parse-the-index">Parse the index</h2>
+<p>The following command will run extract the Locations, Content, Names, Topics, and Occurrences from the index:</p>
+<div class="codehilite"><pre><span></span>    python manage.py parse_epub EPUB_FILENAME
+</pre></div>
               
             </article>
           </div>
@@ -421,7 +460,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../testing/" title="Testing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../setup/" title="Setup" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -430,19 +469,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Testing
+                Setup
               </span>
             </div>
           </a>
         
         
-          <a href="../topics/" title="Topics" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../indexpatterns/" title="Adding A New Indexpattern" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Topics
+                Adding A New Indexpattern
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -472,8 +511,8 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application-2afe21e0b2.js"></script>
-      <script>var config={url:{base:"../.."}},app=new Application(config);app.initialize()</script>
+      <script src="../assets/javascripts/application-2afe21e0b2.js"></script>
+      <script>var config={url:{base:".."}},app=new Application(config);app.initialize()</script>
       
     
     

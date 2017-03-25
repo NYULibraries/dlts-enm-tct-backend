@@ -1,8 +1,8 @@
 import os
 from nyu.settings import *
 
-STATIC_ROOT = '/vagrant/nyu/static'
-MEDIA_ROOT = '/vagrant/nyu/media'
+STATIC_ROOT = '/vagrant/static'
+MEDIA_ROOT = '/vagrant/media'
 # Epub config settings
 EPUB_SOURCES_FOLDER = os.path.join(MEDIA_ROOT, 'epubs')
 EPUB_UPLOAD_FOLDER = EPUB_SOURCES_FOLDER
@@ -31,7 +31,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'otlnyu_db',
-        # 'NAME': 'nyu_refactor_db',
         'USER': 'postgres',
         'PASSWORD': 'password:',
         'HOST': 'localhost',

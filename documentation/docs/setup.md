@@ -30,7 +30,7 @@ The secret key is primarily used for hashing passwords, and for security reasons
 
 ## Importing Data
 
-There are two ways of getting data into the __ENM Topic Curation Toolkit Backend__:
+There are two ways of getting batch data into the __ENM Topic Curation Toolkit Backend__:
 
 1. [Importing an existing database dump](#database-import)
 2. [Run a batch ingest from scratch](#batch-ingest)
@@ -44,6 +44,9 @@ sudo psql nyuotl_db < DUMP_FILE_NAME.sql
 ```
 
 If you have changed the name of the database in the settings file, make sure to use the new database name instead of `nyuotl_db`.
+
+!!! warning
+    This import process is requires an empty database. Running this command on a database with already existing data may result in duplicate data or data corruption.
 
 ### Batch Ingest
 
@@ -59,7 +62,7 @@ If you are using the existing set of EPUBs, you'll need to load the IndexPattern
 python manage.py loaddata indexpatterns.json
 ```
 
-If you are __not__ using the existing set of EPUBs, please see the [adding a new EPUB](new.md) section for instructions on how to configure the system to accept a new EPUB.
+If you are __not__ using the existing set of EPUBs, please see the [adding a new EPUB](new) section for instructions on how to configure the system to accept a new EPUB.
 
 Lastly, ensure that the EPUB files to be ingested are in the proper place. That depends on two settings in the `nyu/production_settings.py` folder:
 
@@ -71,5 +74,5 @@ EPUB_SOURCES_FOLDER = os.path.join(MEDIA_ROOT, 'epubs')
 The `MEDIA_ROOT` folder specifies where __all__ user provided files should be placed on the server, and the `EPUB_SOURCES_FOLDER` is a subfolder inside that where all EPUBS to be processed should be placed. Change the folders to whatever location on the server you would like to store the EPUBS, make sure that the application has write-access to those files (for unzipping the EPUBs), and then run the following command:
 
 ```bash
-python3 manage.py runscript full_batch
+python manage.py runscript full_batch
 ```

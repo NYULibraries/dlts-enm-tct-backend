@@ -22,7 +22,10 @@ class UpdateRelationView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RelatedBasketSerializer
 
     def perform_destroy(self, instance):
-        instance.check_delete()
+        if instance.forbidden:
+            instance.delete()
+        else:
+            instance.check_delete()
 
     def put(self, request, *args, **kwargs):
         relation = self.get_object()
@@ -30,6 +33,10 @@ class UpdateRelationView(generics.RetrieveUpdateDestroyAPIView):
         relation.source_id = request.data['source']
         relation.destination_id = request.data['destination']
         relation.relationtype_id = request.data['relationtype']
+        
+        if request.data.get('forbidden', None) is not None:
+            relation.forbidden = request.data['forbidden']
+
         relation.save()
 
         return Response(RelatedBasketSerializer(relation, direction=request.data['direction']).data)
@@ -108,3 +115,16 @@ class RelationTypeUpdateView(generics.RetrieveUpdateDestroyAPIView):
 class RelationTypeWithCountsView(generics.ListAPIView):
     serializer_class = RelationTypeWithCountsSerializer
     queryset = RelationType.objects.annotate(count=Count('related_baskets'))
+
+
+class ForbiddenRelationsByBasketView(APIView):
+    def get(self, request, *args, **kwargs):
+        basket_id = kwargs['basket_id']
+
+        sources = RelatedBasket.objects.filter(forbidden=True, source_id=basket_id)
+        source_data = RelatedBasketSerializer(sources, many=True, direction='destination').data
+
+        destinations = RelatedBasket.objects.filter(forbidden=True, destination_id=basket_id)
+        destination_data = RelatedBasketSerializer(destinations, many=True, direction='source').data
+
+        return Response(source_data + destination_data)

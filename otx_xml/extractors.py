@@ -9,11 +9,11 @@ from .models import XMLPattern
 
 class XMLExtractor(BaseDocumentExtractor):
     """
-    Generic Extractor for parsing a single xml document into Documents, Locations, Content, 
+    Generic Extractor for parsing a single xml document into Documents, Locations, Content,
     and extracting topics.
 
     In order to be as reusable as possible, the extractor uses an extraction_pattern model
-    to get the requiste xpath and metdata.  This defaults to usung the XMLPattern model from 
+    to get the requiste xpath and metdata.  This defaults to usung the XMLPattern model from
     this app, but that can be overwritten.
 
     lxml is used to load and parse the xml, which can be accessed afer loading in self.tree.
@@ -29,7 +29,7 @@ class XMLExtractor(BaseDocumentExtractor):
         pattern_model = pattern_model or self.default_pattern_model
         pattern_name = pattern_name or self.default_pattern_name
 
-        self.pattern = pattern_model.objects.get(name=pattern_name) 
+        self.pattern = pattern_model.objects.get(name=pattern_name)
 
         super(XMLExtractor, self).__init__(source, loader, **kwargs)
 
@@ -37,7 +37,7 @@ class XMLExtractor(BaseDocumentExtractor):
         xml_string = self.loader.load_source(self.source)
 
         self.tree = etree.fromstring(xml_string)
-
+            
     def extract_title(self):
         return self.tree.xpath(self.pattern.xpath_title)
 
@@ -58,7 +58,7 @@ class XMLExtractor(BaseDocumentExtractor):
             if content:
                 location = self.create_location(content, seq_num, node)
 
-                # Store the location node in the location object, for referencing in future 
+                # Store the location node in the location object, for referencing in future
                 # processing, if necessary
                 location.node = node
                 locations.append(location)
@@ -82,7 +82,7 @@ class XMLExtractor(BaseDocumentExtractor):
 
         content, _ = Content.objects.get_or_create(
             content_descriptor=header,
-            defaults = {
+            defaults={
                 'text': text
             })
 
@@ -90,7 +90,7 @@ class XMLExtractor(BaseDocumentExtractor):
 
     def create_location(self, content, seq_num, node):
         """
-        Given the Content objects, sequence number, and location node, 
+        Given the Content objects, sequence number, and location node,
         constructs the actual Location object for the given node
         """
         if self.pattern.xpath_location_localid:

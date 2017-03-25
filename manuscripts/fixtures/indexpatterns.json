@@ -72,7 +72,7 @@
     "pagenumber_pre_strings": "[\"id=\\\"pg_\"]",
     "pagenumber_css_selector_pattern": "span[@id=\"pg_{}\"]",
     "pagenumber_xpath_pattern": "#pg_{}",
-    "pagenumber_tag_pattern": "<span epub:type=\"pagebreak\" id=\"pg_{}\" title=\"{}\">",
+    "pagenumber_tag_pattern": "<span epub:type=\"pagebreak\" id=\"pg_{0}\" title=\"{0}\">",
     "separator_between_entry_and_occurrences": ",",
     "xpath_occurrence_link": "a[@href and not(starts-with(@href, '#')) and not(starts-with(@href, 'http:'))]",
     "separator_before_first_subentry": ":",

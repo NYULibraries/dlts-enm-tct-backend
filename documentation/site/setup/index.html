@@ -15,7 +15,7 @@
     
     
       
-        <title>Installation - ENM Topic Curation Toolkit Backend Documentation</title>
+        <title>Setup - ENM Topic Curation Toolkit Backend Documentation</title>
       
     
     
@@ -79,7 +79,7 @@
                 </span>
               
             
-            Installation
+            Setup
           
         </span>
       </div>
@@ -163,15 +163,26 @@
           
   <li class="md-nav__item">
     
+      <a href="../installation/" title="Installation" class="md-nav__link">
+        Installation
+      </a>
+    
+  </li>
+
+        
+          
+          
+  <li class="md-nav__item">
+    
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Installation
+        Setup
       </label>
     
-    <a href="./" title="Installation" class="md-nav__link md-nav__link--active">
-      Installation
+    <a href="./" title="Setup" class="md-nav__link md-nav__link--active">
+      Setup
     </a>
     
       
@@ -183,23 +194,23 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" title="Requirements" class="md-nav__link">
-    Requirements
+  <a href="#software-configuration" title="Software configuration" class="md-nav__link">
+    Software configuration
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#base-software-dependencies" title="Base Software Dependencies" class="md-nav__link">
-    Base Software Dependencies
+  <a href="#database-setup" title="Database setup" class="md-nav__link">
+    Database setup
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#python-dependencies" title="Python Dependencies" class="md-nav__link">
-    Python Dependencies
+  <a href="#secret-keys" title="Secret Keys" class="md-nav__link">
+    Secret Keys
   </a>
   
 </li>
@@ -210,26 +221,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#current-production-platform" title="Current Production Platform" class="md-nav__link">
-    Current Production Platform
+  <a href="#importing-data" title="Importing Data" class="md-nav__link">
+    Importing Data
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-import" title="Database Import" class="md-nav__link">
+    Database Import
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-ingest" title="Batch Ingest" class="md-nav__link">
+    Batch Ingest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
     </ul>
   
 </nav>
-    
-  </li>
-
-        
-          
-          
-  <li class="md-nav__item">
-    
-      <a href="../setup/" title="Setup" class="md-nav__link">
-        Setup
-      </a>
     
   </li>
 
@@ -377,23 +397,23 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" title="Requirements" class="md-nav__link">
-    Requirements
+  <a href="#software-configuration" title="Software configuration" class="md-nav__link">
+    Software configuration
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#base-software-dependencies" title="Base Software Dependencies" class="md-nav__link">
-    Base Software Dependencies
+  <a href="#database-setup" title="Database setup" class="md-nav__link">
+    Database setup
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#python-dependencies" title="Python Dependencies" class="md-nav__link">
-    Python Dependencies
+  <a href="#secret-keys" title="Secret Keys" class="md-nav__link">
+    Secret Keys
   </a>
   
 </li>
@@ -404,9 +424,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#current-production-platform" title="Current Production Platform" class="md-nav__link">
-    Current Production Platform
+  <a href="#importing-data" title="Importing Data" class="md-nav__link">
+    Importing Data
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-import" title="Database Import" class="md-nav__link">
+    Database Import
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-ingest" title="Batch Ingest" class="md-nav__link">
+    Batch Ingest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -423,63 +463,70 @@
                
               
                 
-                  <h1>Installation</h1>
+                  <h1>Setup</h1>
                 
-                <h2 id="requirements">Requirements</h2>
-<h3 id="base-software-dependencies">Base Software Dependencies</h3>
-<p>This software is required for proper functioning of the ENM Ingest backend:</p>
-<ul>
-<li>Python &gt;=3.3</li>
-<li>PostgreSQL</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <strong>ENM Topic Curation Backend</strong> requires several postgres-specific features, including ArrayFields and column-specific distinct queries.  Subbing in another RDBMS such as SQLite or MySQL will likely render the software inoperable</p>
-</div>
+                <h2 id="software-configuration">Software configuration</h2>
+<h3 id="database-setup">Database setup</h3>
+<p>By default, <strong>ENM Topic Curation Toolkit Backend</strong> expects PostgreSQL to have a user <code>postgres</code> with the password <code>cFHg*Liw45(</code>, and a database called <code>nyuotl_db</code>. If different settings are required, you can change the <code>DATABASES</code> value in <code>nyu/production_settings.py</code>, which is just a python dictionary of expected database settings:</p>
+<div class="codehilite"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;nyuotl_db&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;cFHg*Liw45(&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="secret-keys">Secret Keys</h3>
+<p><strong>ENM Topic Curation Toolkit Backend</strong> requires a file <code>nyu/secret_keys.json</code> with the following structure:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;SECRET_KEY&quot;</span><span class="p">:</span> <span class="s2">&quot;some_long_random_string_of_letters_numbers_and_symbols&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The secret key is primarily used for hashing passwords, and for security reasons is therefore not kept in the repo.  If you transfer a database with user information (such as from a full .sql dump of a database), you <em>must</em> also transfer the <code>secretkeys.json</code> file to the new installation, or the password hashes will no longer work and user passwords will all have to be manually reset.</p>
+<h2 id="importing-data">Importing Data</h2>
+<p>There are two ways of getting batch data into the <strong>ENM Topic Curation Toolkit Backend</strong>:</p>
+<ol>
+<li><a href="#database-import">Importing an existing database dump</a></li>
+<li><a href="#batch-ingest">Run a batch ingest from scratch</a></li>
+</ol>
+<h3 id="database-import">Database Import</h3>
+<p>Assuming you have a .sql file which is a full database dump of a currently existing database, import the data means simply running</p>
+<div class="codehilite"><pre><span></span>sudo psql nyuotl_db &lt; DUMP_FILE_NAME.sql
+</pre></div>
+
+
+<p>If you have changed the name of the database in the settings file, make sure to use the new database name instead of <code>nyuotl_db</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>One of the python packages, psycopg2, requires PostgreSQL to be install before installing. Make sure both the above dependencies are installed <strong>before</strong> installing the python dependencies below</p>
+<p>This import process is requires an empty database. Running this command on a database with already existing data may result in duplicate data or data corruption.</p>
 </div>
-<h3 id="python-dependencies">Python Dependencies</h3>
-<p>The main python dependencies can be installed from the <code>requirements.txt</code> file, which includes the specific version numbers used in development and production. You can simply install all required python libraries by type:</p>
-<div class="codehilite"><pre><span></span>pip install -r requirements.txt
+<h3 id="batch-ingest">Batch Ingest</h3>
+<p>Ingesting a set of EPUBs from scratch requires a little more setup and configuration.  If you are starting with a fresh database, you'll first need to create the requisite tables with the following command (run from the folder in which the software was installed):</p>
+<div class="codehilite"><pre><span></span>python manage.py migrate
 </pre></div>
 
 
-<p>In case you need to reference the library list, though, here is the full list of python dependencies:</p>
-<ul>
-<li>Django==1.10.3</li>
-<li>django-allauth==0.27.0</li>
-<li>django-autoslug==1.9.3</li>
-<li>django-cors-headers==1.1.0</li>
-<li>django-debug-toolbar==1.5</li>
-<li>django-extensions==1.7.2</li>
-<li>django-filter==0.14.0</li>
-<li>django-rest-auth==0.8.1</li>
-<li>djangorestframework==3.4.6</li>
-<li>lxml==3.6.4</li>
-<li>psycopg2==2.6.2</li>
-</ul>
-<p>This documentation was built with the <a href="http://www.mkdocs.org/">MkDocs</a> markdown-based documentation library.  If you want to make changes to this documentation, this requires several additional python libraries:</p>
-<ul>
-<li>Markdown==2.6.8</li>
-<li>mkdocs==0.16.1</li>
-<li>mkdocs-material==1.0.3</li>
-<li>Pygments==2.2.0</li>
-<li>pymdown-extensions==1.8</li>
-</ul>
-<p>For convenience, this all can be install via:</p>
-<div class="codehilite"><pre><span></span>pip install -r requirements-documentation.txt
+<p>If you are using the existing set of EPUBs, you'll need to load the IndexPattern data with the following command:</p>
+<div class="codehilite"><pre><span></span>python manage.py loaddata indexpatterns.json
 </pre></div>
 
 
-<h2 id="current-production-platform">Current Production Platform</h2>
-<p>The following represent the current production environment for running the ENM Topic Curation Backend. These are not required, but having been tested as an effective production system:</p>
-<ul>
-<li><strong>OS</strong>: Ubuntu 16.04</li>
-<li><strong>Application Server</strong>: uWSGI</li>
-<li><strong>Web Server</strong>: nginx</li>
-</ul>
+<p>If you are <strong>not</strong> using the existing set of EPUBs, please see the <a href="../new">adding a new EPUB</a> section for instructions on how to configure the system to accept a new EPUB.</p>
+<p>Lastly, ensure that the EPUB files to be ingested are in the proper place. That depends on two settings in the <code>nyu/production_settings.py</code> folder:</p>
+<div class="codehilite"><pre><span></span><span class="n">MEDIA_ROOT</span> <span class="o">=</span> <span class="s1">&#39;/www/nyu.infoloom.nyc/media/&#39;</span>
+<span class="n">EPUB_SOURCES_FOLDER</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MEDIA_ROOT</span><span class="p">,</span> <span class="s1">&#39;epubs&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The <code>MEDIA_ROOT</code> folder specifies where <strong>all</strong> user provided files should be placed on the server, and the <code>EPUB_SOURCES_FOLDER</code> is a subfolder inside that where all EPUBS to be processed should be placed. Change the folders to whatever location on the server you would like to store the EPUBS, make sure that the application has write-access to those files (for unzipping the EPUBs), and then run the following command:</p>
+<div class="codehilite"><pre><span></span>python manage.py runscript full_batch
+</pre></div>
               
             </article>
           </div>
@@ -492,7 +539,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../installation/" title="Installation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -501,19 +548,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Installation
               </span>
             </div>
           </a>
         
         
-          <a href="../setup/" title="Setup" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../new/" title="Adding A New Epub" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Setup
+                Adding A New Epub
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -2,9 +2,9 @@ from .settings import *
 import os
 import json
 
-ALLOWED_HOSTS = ['69.30.245.221', '69.30.245.218', 'nyuapi.infoloom.nyc']
-STATIC_ROOT = '/www/nyu.infoloom.nyc/static/'
-MEDIA_ROOT = '/www/nyu.infoloom.nyc/media/'
+ALLOWED_HOSTS = ['nyuapi.infoloom.nyc', ]
+STATIC_ROOT = '/srv/static/'
+MEDIA_ROOT = '/srv/media/'
 # MEDIA_SERVER = 'http://localhost:8000/media'
 # Epub config settings
 EPUB_SOURCES_FOLDER = os.path.join(MEDIA_ROOT, 'epubs')

@@ -62,7 +62,8 @@ class EpubExtractor(BaseDocumentExtractor):
             defaults = {
                 'contents': self.epub_folder,
                 'oebps_folder': oebps_folder,
-                'manifest': manifest
+                'manifest': manifest,
+                'source': self.source
             }
         )
 

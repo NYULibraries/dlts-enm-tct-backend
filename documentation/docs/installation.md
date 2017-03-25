@@ -10,6 +10,9 @@ This software is required for proper functioning of the ENM Ingest backend:
 !!! note
     The __ENM Topic Curation Backend__ requires several postgres-specific features, including ArrayFields and column-specific distinct queries.  Subbing in another RDBMS such as SQLite or MySQL will likely render the software inoperable
 
+!!! warning
+    One of the python packages, psycopg2, requires PostgreSQL to be install before installing. Make sure both the above dependencies are installed __before__ installing the python dependencies below
+
 ### Python Dependencies
 
 The main python dependencies can be installed from the `requirements.txt` file, which includes the specific version numbers used in development and production. You can simply install all required python libraries by type:
