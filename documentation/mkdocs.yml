@@ -7,7 +7,7 @@ pages:
       - Installation: installation.md
       - Setup: setup.md
   - Ingest:
-    - 'Adding A New Epub': new.md
+    - 'Adding A New EPUB': new.md
     - 'Adding A New Indexpattern': indexpatterns.md
   - Testing: testing.md
   - API:

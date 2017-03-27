@@ -15,7 +15,7 @@
     
     
       
-        <title>Adding A New Epub - ENM Topic Curation Toolkit Backend Documentation</title>
+        <title>Adding A New EPUB - ENM Topic Curation Toolkit Backend Documentation</title>
       
     
     
@@ -79,7 +79,7 @@
                 </span>
               
             
-            Adding A New Epub
+            Adding A New EPUB
           
         </span>
       </div>
@@ -210,11 +210,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Adding A New Epub
+        Adding A New EPUB
       </label>
     
-    <a href="./" title="Adding A New Epub" class="md-nav__link md-nav__link--active">
-      Adding A New Epub
+    <a href="./" title="Adding A New EPUB" class="md-nav__link md-nav__link--active">
+      Adding A New EPUB
     </a>
     
       
@@ -411,16 +411,16 @@
                
               
                 
-                  <h1>Adding A New Epub</h1>
+                  <h1>Adding A New EPUB</h1>
                 
-                <p>This guide assumes that you have already batch ingest a number of EPUBs, and are looking to manually add an additional EPUB.  It will take you through the steps of adding a new EPUB into the system.  If you want to know how to do an initial batch import, please refer to that <a href="../setup#importing-data">section of the setup guide</a>.</p>
+                <p>This guide assumes that you have already batch ingested a number of EPUBs, and are looking to manually add an additional EPUB.  It will take you through the steps of adding a new EPUB into the system.  If you want to know how to do an initial batch import, please refer to that <a href="../setup#importing-data">section of the setup guide</a>.</p>
 <h2 id="place-the-epub-in-the-epub_sources-folder">Place the EPUB in the EPUB_SOURCES folder</h2>
-<p>The new EPUB should be place in the folder  specified by the attribute <code>EPUB_SOURCES_FOLDER</code> in <code>nyu.production_settings</code>. Once placed, run the following command:</p>
+<p>The new EPUB should be placed in the folder specified by the attribute <code>EPUB_SOURCES_FOLDER</code> in <code>nyu.production_settings</code>. Once placed, run the following command:</p>
 <div class="codehilite"><pre><span></span>python manage.py add_new_epub EPUB_FILENAME
 </pre></div>
 
 
-<p>make sure that you only provide the base EPUB filename, not the full path.  Note that this will merely decompressed the EPUB and load its metadata, it will <strong>not</strong> extract Topics, Names, or Locations.</p>
+<p>make sure that you only provide the base EPUB filename, not the full path.  Note that this will merely decompress the EPUB and load its metadata, it will <strong>not</strong> extract Topics, Names, or Locations.</p>
 <h2 id="choose-an-indexpattern-for-the-epub-or-create-a-new-one">Choose an Indexpattern for the Epub or create a new one</h2>
 <p>The new, decompressed EPUB can be found in the folder specified by the <code>EPUB_DECOMPRESSED_FOLDER</code>.  Open the xhtml files in the EPUB and see if its xhtml structure and index structure match any of the existing Indexpatterns.  </p>
 <p>If you need to create a new Indexpattern to match the current structure, please see <a href="../indexpatterns">our separate guide</a>.  Once the new Indexpatterns is created, be sure to add it to the <code>indexpatterns.json</code> file, and then rerun Indexpattern ingest:</p>
@@ -434,7 +434,7 @@
 
 
 <h2 id="locate-the-index-id-in-the-manifest">Locate the Index ID in the manifest</h2>
-<p>Inside the unzipped Epub document, locate the <em>EPUB manifest</em>. This file, usually (but not exclusively) a .opf file, will list the contents and ordering of the EPUB document. Locate the index(es) in the list of <code>&lt;item&gt;</code> tags, and note the id attribute on that tag. That id must be added to the <code>initial/index_ids.py</code> dictionary. The structure is much like that on the <code>pattern_mapping</code> dictionary, so an epub with the filename <em>0123456789999.epub</em> and an index id of <em>ch09index.html</em> would require the following line to the index_ids dictionary:</p>
+<p>Inside the unzipped EPUB document, locate the <em>EPUB manifest</em>. This file, usually (but not exclusively) a .opf file, will list the contents and ordering of the EPUB document. Locate the index(es) in the list of <code>&lt;item&gt;</code> tags, and note the id attribute on that tag. That id must be added to the <code>initial/index_ids.py</code> dictionary. The structure is much like that on the <code>pattern_mapping</code> dictionary, so an EPUB with the filename <em>0123456789999.epub</em> and an index id of <em>ch09index.html</em> would require the following line to the index_ids dictionary:</p>
 <div class="codehilite"><pre><span></span>    <span class="s1">&#39;0123456789999&#39;</span><span class="p">:</span> <span class="s1">&#39;ch09index.html&#39;</span><span class="p">,</span>
 </pre></div>
 

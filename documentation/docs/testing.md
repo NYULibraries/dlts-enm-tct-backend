@@ -1,6 +1,6 @@
 ## Testing Dependendencies
 
-Our tests run on Django's built in test suite, which can be run without any additional dependencies.  However, additional testing tools such as coverage can be useful for development purposes, and those have been included in the separate `requirements-testing.txt` file.  To install those utilities, run
+Our tests run on Django's built-in test suite, which can be run without any additional dependencies.  However, additional testing tools such as coverage can be useful for development purposes, and those have been included in the separate `requirements-testing.txt` file.  To install those utilities, run
 
 ```bash
 pip install -r requirements-testing.txt

@@ -2,16 +2,16 @@
 
 Description                         | Endpoint                                                    | Extra Parameters
 ----------------------------------  | ---------------------------------------------------------   | ----------------
-List of All Epubs                   | [/api/epub/document/all/](#all-epubs)                       |
-Epub Detail                         | [/api/epub/document/DOCUMENT_ID/](#epub-detail)             | withOccurrences
+List of All EPUBs                   | [/api/epub/document/all/](#all-epubs)                       |
+EPUB Detail                         | [/api/epub/document/DOCUMENT_ID/](#epub-detail)             | withOccurrences
 Single Page                         | [/api/epub/location/DOCUMENT_ID/](#single-page)             |
 List of All Indexpatterns           | [/api/epub/index-pattern/all/](#all-indexpatterns)          |
 
 ---
 
-## All Epubs
+## All EPUBs
 
-Lists all epubs in the system.  Note that this includes any epub in the system that has no index (and therefore no topics) or no page marker indicators in the original text (and therefore no pages in our system).
+Lists all EPUBs in the system.  Note that this includes any EPUB in the system that has no index (and therefore no topics) or no page marker indicators in the original text (and therefore no pages in our system).
 
 ```
 /api/epub/document/all/
@@ -50,17 +50,17 @@ Lists all epubs in the system.  Note that this includes any epub in the system t
 
 Field          | Type    | Description
 -------------  | ------- | -----------
-id             | Integer | Internal id and primary identifier for each epub. 
-title          | String  | Title of the Epub
-author         | String  | Author of the Epub
-publisher      | String  | Publisher of the epub.  Note that this information is extracted from the text itself, and may not be exact string matches across epubs for any given publisher (as you can see in the example above, which has three different ways of referring to NYU Press)
-isbn           | String  | ISBN number for the book. Note that this is extracted from the epub filename, not extracted from any metadata from the book itself. Be aware of this limitation in future ingests
+id             | Integer | Internal id and primary identifier for each EPUB 
+title          | String  | Title of the EPUB
+author         | String  | Author of the EPUB
+publisher      | String  | Publisher of the EPUB.  Note that this information is extracted from the text itself, and may not be exact string matches across EPUBs for any given publisher (as you can see in the example above, which has three different ways of referring to NYU Press)
+isbn           | String  | ISBN number for the book. Note that this is extracted from the EPUB filename, not extracted from any metadata from the book itself. Be aware of this limitation in future ingests
 
 ---
 
-## Epub Detail
+## EPUB Detail
 
-Lists all Pages in a given Epub.
+Lists all Pages in a given EPUB.
 
 ```
 /api/epub/document/DOCUMENT_ID/
@@ -72,7 +72,7 @@ For expanded location information, you can set the query parameter `withOccurren
 /api/epub/document/DOCUMENT_ID/?withOccurrences=True
 ```
 
-That will give expanded location information, including occurrences and pagenumbers. The location data for this response is identical to that from the [Location Detail](#single-page), just as an array of every page for that particular book. Refer to the [single page](#single-page) endpoint for a description of the response structure and fields.  
+That will give expanded location information, including occurrences and page numbers. The location data for this response is identical to that from the [Location Detail](#single-page), just as an array of every page for that particular book. Refer to the [single page](#single-page) endpoint for a description of the response structure and fields.  
 
 ### Example Response
 
@@ -117,11 +117,11 @@ That will give expanded location information, including occurrences and pagenumb
 
 Field                           | Type    | Description
 ------------------------------- | ------- | -----------
-id                              | Integer | Internal id and primary identifier for each epub
-title                           | String  | Title of the Epub
-author                          | String  | Author of the Epub
-epub                            | String  | Publisher of the epub. See [All Epubs](#all-epubs) for note about consistency.
-isbn                            | String  | ISBN number for the book. See [All Epubs](#all-epubs) for note about sourcing.
+id                              | Integer | Internal id and primary identifier for each EPUB 
+title                           | String  | Title of the EPUB
+author                          | String  | Author of the EPUB 
+epub                            | String  | Publisher of the EPUB. See [All EPUBs](#all-epubs) for note about consistency.
+isbn                            | String  | ISBN number for the book. See [All EPUBs](#all-epubs) for note about sourcing.
 locations[...].id               | Integer | Internal id and primary identifier for each page. Usual caveats regarding IDs apply
 locations[...].localid          | String  | Human-readable representation of the page number
 locations[...].sequence_number  | Integer | Number used for properly ordering pages in a book 
@@ -204,14 +204,14 @@ Contents information on a single page, including the pages full textual content 
 Field                                 | Type    | Description
 ------------------------------------- | ------- | -----------
 id                                    | Integer | Internal id and primary identifier of this page
-content.content_unique_indicator      | String  | Human readable identifier of this content block. Usually a combination of the Epub's internal ID and the Page's 'localid'.  Used internally for deduplication.
+content.content_unique_indicator      | String  | Human readable identifier of this content block. Usually a combination of the EPUB's internal ID and the Page's 'localid'.  Used internally for deduplication.
 content.content_descriptor            | String  | Human readable description of the content's location
 content.text                          | String  | Full text of the page
-document.id                           | Integer | Internal id and primary identifier for each epub
-document.title                        | String  | Title of the Epub
-document.author                       | String  | Author of the Epub
-document.epub                         | String  | Publisher of the epub. See [All Epubs](#all-epubs) for note about consistency.
-document.isbn                         | String  | ISBN number for the book. See [All Epubs](#all-epubs) for note about sourcing.
+document.id                           | Integer | Internal id and primary identifier for each EPUB
+document.title                        | String  | Title of the EPUB
+document.author                       | String  | Author of the EPUB
+document.epub                         | String  | Publisher of the EPUB. See [All EPUBs](#all-epubs) for note about consistency.
+document.isbn                         | String  | ISBN number for the book. See [All EPUBs](#all-epubs) for note about sourcing.
 context                               | String  | Not used in Enhanced Network Monographs
 occurrences                           | List    | All the topics on this page
 occurrences[...].id                   | Integer | Internal id for this occurrence
@@ -219,19 +219,19 @@ occurrences[...].basket.id            | Integer | Internal id for this topic
 occurrences[...].basket.display_name  | Integer | display_name for given topic. See [All Topics](topics/#all-topics) for more information
 occurrences[...].ring_next            | Integer | Location ID (i.e. internal id of the page) of the next occurrence of this topic.  If `null`, then this is the only instance of this topic
 occurrences[...].ring_previous        | Integer | Location ID (i.e. internal id of the page) of the previous occurrence of this topic.  If `null`, then this is the only instance of this topic
-pagenumber.filepath                   | String  | Location of the specific xml file in which this location is found, relative to the root folder of the unzipped epub
-pagenumber.pagenumber_tag             | String  | Reconstructed pagenumber identifier tag as it appears in the epub
+pagenumber.filepath                   | String  | Location of the specific xml file in which this location is found, relative to the root folder of the unzipped EPUB
+pagenumber.pagenumber_tag             | String  | Reconstructed page number identifier tag as it appears in the EPUB 
 pagenumber.css_selector               | String  | CSS Selector for finding the location within the original xml file
 pagenumber.xpath                      | String  | xpath for finding the location within the original xml file
 localid                               | String  | Human-readable representation of the page number
-next_location_id                      | Integer | Id of the next location (page) in this epub
-previous_location_id                  | Integer | Id of the previous location (page) in this epub
+next_location_id                      | Integer | Id of the next location (page) in this EPUB
+previous_location_id                  | Integer | Id of the previous location (page) in this EPUB
 
 ---
 
 ## All IndexPatterns
 
-A list of all IndexPattern objects. Indexpatterns are primarily used for extraction, but are also used for conforming the `localid` attribute (which is essentially just a stored pagenumber) to the css selectors/xpath/tag necessary for finding the location in the original epub file.
+A list of all IndexPattern objects. Indexpatterns are primarily used for extraction, but are also used for conforming the `localid` attribute (which is essentially just a stored page number) to the css selectors/xpath/tag necessary for finding the location in the original EPUB file.
 
 ```
 /api/epub/index-pattern/all/
@@ -310,9 +310,9 @@ Field                                   | Type           | Description
 --------------------------------------- | -------------- | -----------
 name                                    | String         | Unique string representation of indexpattern. Primary means of fetching a pattern from the database
 description                             | String         | Longer, human-readable text description of the IndexPattern. __Note:__ Descriptions are _not_ guaranteed to be unique by the database, and are merely meant to contain supplemental information.
-pagenumber_pre_strings                  | Array (String) | When locating pagenumbers, this is a list of patterns to look for and split the text on. After this processing is done, the result should be a list of strings with the pagenumber at the beginning of the string, followed by the content of the page. Used for extracting both locations and content from an epub
-pagenumber_css_selector_pattern         | String         | Pattern used to conform a page number (as stored in localid) to a css selector. All patterns must contain "{}" where the pagenumber should go, as python string formatting is used to add the pagenumber from any given location
-pagenumber_xpath_pattern                | String         | Pattern used to conform a page number (as stored in localid) to an xpath. All patterns must contain "{}" where the pagenumber should go, as python string formatting is used to add the pagenumber from any given location
+pagenumber_pre_strings                  | Array (String) | When locating page numbers, this is a list of patterns to look for and split the text on. After this processing is done, the result should be a list of strings with the page number at the beginning of the string, followed by the content of the page. Used for extracting both locations and content from an EPUB
+pagenumber_css_selector_pattern         | String         | Pattern used to conform a page number (as stored in localid) to a css selector. All patterns must contain "{}" where the page number should go, as python string formatting is used to add the page number from any given location
+pagenumber_xpath_pattern                | String         | Pattern used to conform a page number (as stored in localid) to an xpath. All patterns must contain "{}" where the page number should go, as python string formatting is used to add the page number from any given location
 xpath_entry                             | String         | xpath used to locate main entries in the index
 see_split_strings                       | Array (String) | When parsing an entry, split on these strings to separate a "See" from the main entry (Sees are not always reliably enclosed in tags, and therefore require string processing)
 see_also_split_strings                  | Array (String) | Same as above, but with See Also
@@ -330,6 +330,6 @@ separator_between_entry_and_occurrences | String         | Separator between an 
 separator_before_first_subentry         | String         | Indexes sometimes collapse an entry and the first subentry into a single line.  For example, the entry _Clinton, William: presidency of_ is actually a main entry (_Clinton, William_) and the first subentry (_presidency of_).  In this case, the `separator_before_first_subentry` would be the colon (:)
 xpath_occurrence_link                   | String         | xpath to find occurrences in an entry
 indicators_of_occurrence_range          | Array (String) | Character(s) used to indicate a range of pages in an index, e.g. 145-54. Needs to be an array because indexes are inconsistent in their use of punctation (sometimes using a mixture of hyphens, em dashes, and en dahses)
-documents                               | Array          | List of epubs associated with that particular indexpattern
-documents[...].id                       | Integer        | Internal id and primary identifier for each epub
-documents[...].title                    | String         | Title of the Epub
+documents                               | Array          | List of EPUBs associated with that particular indexpattern
+documents[...].id                       | Integer        | Internal id and primary identifier for each EPUB
+documents[...].title                    | String         | Title of the EPUB

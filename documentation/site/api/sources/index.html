@@ -206,8 +206,8 @@
           
   <li class="md-nav__item">
     
-      <a href="../../new/" title="Adding A New Epub" class="md-nav__link">
-        Adding A New Epub
+      <a href="../../new/" title="Adding A New EPUB" class="md-nav__link">
+        Adding A New EPUB
       </a>
     
   </li>
@@ -309,8 +309,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#all-epubs" title="All Epubs" class="md-nav__link">
-    All Epubs
+  <a href="#all-epubs" title="All EPUBs" class="md-nav__link">
+    All EPUBs
   </a>
   
     <nav class="md-nav">
@@ -336,8 +336,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#epub-detail" title="Epub Detail" class="md-nav__link">
-    Epub Detail
+  <a href="#epub-detail" title="EPUB Detail" class="md-nav__link">
+    EPUB Detail
   </a>
   
     <nav class="md-nav">
@@ -465,8 +465,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#all-epubs" title="All Epubs" class="md-nav__link">
-    All Epubs
+  <a href="#all-epubs" title="All EPUBs" class="md-nav__link">
+    All EPUBs
   </a>
   
     <nav class="md-nav">
@@ -492,8 +492,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#epub-detail" title="Epub Detail" class="md-nav__link">
-    Epub Detail
+  <a href="#epub-detail" title="EPUB Detail" class="md-nav__link">
+    EPUB Detail
   </a>
   
     <nav class="md-nav">
@@ -598,12 +598,12 @@
 </thead>
 <tbody>
 <tr>
-<td>List of All Epubs</td>
+<td>List of All EPUBs</td>
 <td><a href="#all-epubs">/api/epub/document/all/</a></td>
 <td></td>
 </tr>
 <tr>
-<td>Epub Detail</td>
+<td>EPUB Detail</td>
 <td><a href="#epub-detail">/api/epub/document/DOCUMENT_ID/</a></td>
 <td>withOccurrences</td>
 </tr>
@@ -620,8 +620,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="all-epubs">All Epubs</h2>
-<p>Lists all epubs in the system.  Note that this includes any epub in the system that has no index (and therefore no topics) or no page marker indicators in the original text (and therefore no pages in our system).</p>
+<h2 id="all-epubs">All EPUBs</h2>
+<p>Lists all EPUBs in the system.  Note that this includes any EPUB in the system that has no index (and therefore no topics) or no page marker indicators in the original text (and therefore no pages in our system).</p>
 <div class="codehilite"><pre><span></span>/api/epub/document/all/
 </pre></div>
 
@@ -667,33 +667,33 @@
 <tr>
 <td>id</td>
 <td>Integer</td>
-<td>Internal id and primary identifier for each epub.</td>
+<td>Internal id and primary identifier for each EPUB</td>
 </tr>
 <tr>
 <td>title</td>
 <td>String</td>
-<td>Title of the Epub</td>
+<td>Title of the EPUB</td>
 </tr>
 <tr>
 <td>author</td>
 <td>String</td>
-<td>Author of the Epub</td>
+<td>Author of the EPUB</td>
 </tr>
 <tr>
 <td>publisher</td>
 <td>String</td>
-<td>Publisher of the epub.  Note that this information is extracted from the text itself, and may not be exact string matches across epubs for any given publisher (as you can see in the example above, which has three different ways of referring to NYU Press)</td>
+<td>Publisher of the EPUB.  Note that this information is extracted from the text itself, and may not be exact string matches across EPUBs for any given publisher (as you can see in the example above, which has three different ways of referring to NYU Press)</td>
 </tr>
 <tr>
 <td>isbn</td>
 <td>String</td>
-<td>ISBN number for the book. Note that this is extracted from the epub filename, not extracted from any metadata from the book itself. Be aware of this limitation in future ingests</td>
+<td>ISBN number for the book. Note that this is extracted from the EPUB filename, not extracted from any metadata from the book itself. Be aware of this limitation in future ingests</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="epub-detail">Epub Detail</h2>
-<p>Lists all Pages in a given Epub.</p>
+<h2 id="epub-detail">EPUB Detail</h2>
+<p>Lists all Pages in a given EPUB.</p>
 <div class="codehilite"><pre><span></span>/api/epub/document/DOCUMENT_ID/
 </pre></div>
 
@@ -703,7 +703,7 @@
 </pre></div>
 
 
-<p>That will give expanded location information, including occurrences and pagenumbers. The location data for this response is identical to that from the <a href="#single-page">Location Detail</a>, just as an array of every page for that particular book. Refer to the <a href="#single-page">single page</a> endpoint for a description of the response structure and fields.  </p>
+<p>That will give expanded location information, including occurrences and page numbers. The location data for this response is identical to that from the <a href="#single-page">Location Detail</a>, just as an array of every page for that particular book. Refer to the <a href="#single-page">single page</a> endpoint for a description of the response structure and fields.  </p>
 <h3 id="example-response_1">Example Response</h3>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Originality, Imitation, and Plagiarism&quot;</span><span class="p">,</span>
@@ -755,27 +755,27 @@
 <tr>
 <td>id</td>
 <td>Integer</td>
-<td>Internal id and primary identifier for each epub</td>
+<td>Internal id and primary identifier for each EPUB</td>
 </tr>
 <tr>
 <td>title</td>
 <td>String</td>
-<td>Title of the Epub</td>
+<td>Title of the EPUB</td>
 </tr>
 <tr>
 <td>author</td>
 <td>String</td>
-<td>Author of the Epub</td>
+<td>Author of the EPUB</td>
 </tr>
 <tr>
 <td>epub</td>
 <td>String</td>
-<td>Publisher of the epub. See <a href="#all-epubs">All Epubs</a> for note about consistency.</td>
+<td>Publisher of the EPUB. See <a href="#all-epubs">All EPUBs</a> for note about consistency.</td>
 </tr>
 <tr>
 <td>isbn</td>
 <td>String</td>
-<td>ISBN number for the book. See <a href="#all-epubs">All Epubs</a> for note about sourcing.</td>
+<td>ISBN number for the book. See <a href="#all-epubs">All EPUBs</a> for note about sourcing.</td>
 </tr>
 <tr>
 <td>locations[...].id</td>
@@ -885,7 +885,7 @@
 <tr>
 <td>content.content_unique_indicator</td>
 <td>String</td>
-<td>Human readable identifier of this content block. Usually a combination of the Epub's internal ID and the Page's 'localid'.  Used internally for deduplication.</td>
+<td>Human readable identifier of this content block. Usually a combination of the EPUB's internal ID and the Page's 'localid'.  Used internally for deduplication.</td>
 </tr>
 <tr>
 <td>content.content_descriptor</td>
@@ -900,27 +900,27 @@
 <tr>
 <td>document.id</td>
 <td>Integer</td>
-<td>Internal id and primary identifier for each epub</td>
+<td>Internal id and primary identifier for each EPUB</td>
 </tr>
 <tr>
 <td>document.title</td>
 <td>String</td>
-<td>Title of the Epub</td>
+<td>Title of the EPUB</td>
 </tr>
 <tr>
 <td>document.author</td>
 <td>String</td>
-<td>Author of the Epub</td>
+<td>Author of the EPUB</td>
 </tr>
 <tr>
 <td>document.epub</td>
 <td>String</td>
-<td>Publisher of the epub. See <a href="#all-epubs">All Epubs</a> for note about consistency.</td>
+<td>Publisher of the EPUB. See <a href="#all-epubs">All EPUBs</a> for note about consistency.</td>
 </tr>
 <tr>
 <td>document.isbn</td>
 <td>String</td>
-<td>ISBN number for the book. See <a href="#all-epubs">All Epubs</a> for note about sourcing.</td>
+<td>ISBN number for the book. See <a href="#all-epubs">All EPUBs</a> for note about sourcing.</td>
 </tr>
 <tr>
 <td>context</td>
@@ -960,12 +960,12 @@
 <tr>
 <td>pagenumber.filepath</td>
 <td>String</td>
-<td>Location of the specific xml file in which this location is found, relative to the root folder of the unzipped epub</td>
+<td>Location of the specific xml file in which this location is found, relative to the root folder of the unzipped EPUB</td>
 </tr>
 <tr>
 <td>pagenumber.pagenumber_tag</td>
 <td>String</td>
-<td>Reconstructed pagenumber identifier tag as it appears in the epub</td>
+<td>Reconstructed page number identifier tag as it appears in the EPUB</td>
 </tr>
 <tr>
 <td>pagenumber.css_selector</td>
@@ -985,18 +985,18 @@
 <tr>
 <td>next_location_id</td>
 <td>Integer</td>
-<td>Id of the next location (page) in this epub</td>
+<td>Id of the next location (page) in this EPUB</td>
 </tr>
 <tr>
 <td>previous_location_id</td>
 <td>Integer</td>
-<td>Id of the previous location (page) in this epub</td>
+<td>Id of the previous location (page) in this EPUB</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="all-indexpatterns">All IndexPatterns</h2>
-<p>A list of all IndexPattern objects. Indexpatterns are primarily used for extraction, but are also used for conforming the <code>localid</code> attribute (which is essentially just a stored pagenumber) to the css selectors/xpath/tag necessary for finding the location in the original epub file.</p>
+<p>A list of all IndexPattern objects. Indexpatterns are primarily used for extraction, but are also used for conforming the <code>localid</code> attribute (which is essentially just a stored page number) to the css selectors/xpath/tag necessary for finding the location in the original EPUB file.</p>
 <div class="codehilite"><pre><span></span>/api/epub/index-pattern/all/
 </pre></div>
 
@@ -1090,17 +1090,17 @@
 <tr>
 <td>pagenumber_pre_strings</td>
 <td>Array (String)</td>
-<td>When locating pagenumbers, this is a list of patterns to look for and split the text on. After this processing is done, the result should be a list of strings with the pagenumber at the beginning of the string, followed by the content of the page. Used for extracting both locations and content from an epub</td>
+<td>When locating page numbers, this is a list of patterns to look for and split the text on. After this processing is done, the result should be a list of strings with the page number at the beginning of the string, followed by the content of the page. Used for extracting both locations and content from an EPUB</td>
 </tr>
 <tr>
 <td>pagenumber_css_selector_pattern</td>
 <td>String</td>
-<td>Pattern used to conform a page number (as stored in localid) to a css selector. All patterns must contain "{}" where the pagenumber should go, as python string formatting is used to add the pagenumber from any given location</td>
+<td>Pattern used to conform a page number (as stored in localid) to a css selector. All patterns must contain "{}" where the page number should go, as python string formatting is used to add the page number from any given location</td>
 </tr>
 <tr>
 <td>pagenumber_xpath_pattern</td>
 <td>String</td>
-<td>Pattern used to conform a page number (as stored in localid) to an xpath. All patterns must contain "{}" where the pagenumber should go, as python string formatting is used to add the pagenumber from any given location</td>
+<td>Pattern used to conform a page number (as stored in localid) to an xpath. All patterns must contain "{}" where the page number should go, as python string formatting is used to add the page number from any given location</td>
 </tr>
 <tr>
 <td>xpath_entry</td>
@@ -1190,17 +1190,17 @@
 <tr>
 <td>documents</td>
 <td>Array</td>
-<td>List of epubs associated with that particular indexpattern</td>
+<td>List of EPUBs associated with that particular indexpattern</td>
 </tr>
 <tr>
 <td>documents[...].id</td>
 <td>Integer</td>
-<td>Internal id and primary identifier for each epub</td>
+<td>Internal id and primary identifier for each EPUB</td>
 </tr>
 <tr>
 <td>documents[...].title</td>
 <td>String</td>
-<td>Title of the Epub</td>
+<td>Title of the EPUB</td>
 </tr>
 </tbody>
 </table>

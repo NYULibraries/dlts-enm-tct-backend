@@ -1,4 +1,6 @@
-Adding new Indexpattern is perhapse the most complicated part of configuring the __ENM TCT Backend__.  This page will explain the various fields in the Indexpattern model and how they might be configured for a new Indexpattern, but be aware that this process is often iterative and may require some trial and error to get the proper values.
+Index patterns are used to extract data from the existing indexes, and describe how the various components appear in the index as provided, what are the signs of punctuation or markup used to identify entries, separate page numbers, indicate subentries, etc.
+
+Adding a new Indexpattern is perhaps the most complicated part of configuring the __ENM TCT Backend__.  This page will explain the various fields in the Indexpattern model and how they might be configured for a new Indexpattern, but be aware that this process is often iterative and may require some trial and error to get the proper values.
 
 ## Indexpattern Fields
 
@@ -53,7 +55,7 @@ A list of classes used to indicate a subentry in the index, specifically for ind
 would have a value of `['indexsub']` for __subentry_classes__.
 
 !!! Note
-    This field is only used for indexes in which there are seperate line rather than (or in addition to) inline subentries.  If left blank, the parser will assume that the index __only__ contains inline subentries. 
+    This field is only used for indexes in which there are separate line rather than (or in addition to) inline subentries.  If left blank, the parser will assume that the index __only__ contains inline subentries. 
 
 ---
 
@@ -89,7 +91,7 @@ would have a value of `em` for __xpath_seealso__.
 
 __Field Type__: Array (String)
 
-When identifying pages in the text, this is the string used to split an entire page to separate into individual pages. The goal is to have each remaining page string begin with the pagenumber, so the split string should include the tag text that occurs right before the pagenumber.  For example, in an EPUB with the following text:
+When identifying pages in the text, this is the string used to split an entire page to separate into individual pages. The goal is to have each remaining page string begin with the page number, so the split string should include the tag text that occurs right before the page number.  For example, in an EPUB with the following text:
 
 ```xml
 <p class="indent">Washington was widely admired for his strong leadership qualities and was unanimously elected president by the Electoral College in the first two national elections. He oversaw the creation of a strong, well-financed national government that maintained neutrality in the French Revolutionary Wars, suppressed the Whiskey Rebellion, and won acceptance among Americans of all types.[3] <a id="page_172"></a>Washington's incumbency established many precedents still in use today, such as the cabinet system, the inaugural address, and the title Mr. President.[4][5] His retirement from office after two terms established a tradition that lasted until 1940 when Franklin Delano Roosevelt won an unprecedented third term. The 22nd Amendment (1951) now limits the president to two elected terms.</p>
@@ -105,7 +107,7 @@ could have a value of `['id="page_']` for __pagenumber_pre_strings__.
 
 __Field Type__: String
 
-An xpath pattern used to find a particular page using xpath in the original text. Any tool using this pattern will use python's string `format` function to construct the specific xpath pattern for that particular page, and should therefor include the characters `{}` or `{0}` where the pagenumber should be inserted. If the pagenumber should be used multiple times in the string, you must use the second version `{0}`.  So, for example, the text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `a[@id="page_{0}"]` for __pagenumber_xpath_patern__.
+An xpath pattern used to find a particular page using xpath in the original text. Any tool using this pattern will use python's string `format` function to construct the specific xpath pattern for that particular page, and should therefore include the characters `{}` or `{0}` where the page number should be inserted. If the page number should be used multiple times in the string, you must use the second version `{0}`.  So, for example, the text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `a[@id="page_{0}"]` for __pagenumber_xpath_patern__.
 
 ---
 
@@ -121,7 +123,7 @@ This field functions much like the [pagenumber_xpath_pattern](#pagenumber_xpath_
 
 __Field Type__: String
 
-This field functions much like the [pagenumber_xpath_pattern](#pagenumber_xpath_pattern), but instead reconstructs the original pagenumber locator tag as it existed in the original text. For example, the same text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `<a id="page_{0}">` for __pagenumber_tag__pattern__.
+This field functions much like the [pagenumber_xpath_pattern](#pagenumber_xpath_pattern), but instead reconstructs the original page number locator tag as it existed in the original text. For example, the same text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `<a id="page_{0}">` for __pagenumber_tag__pattern__.
 
 ---
 
@@ -171,7 +173,7 @@ would have a value of `:` for __separator_before_first_subentry__.
 
 __Field Type__: String
 
-Inline subentries use punctation to separate between different subentries on the same line: this field holds the punctuation that demarkates a new subentry. For example, the following index text:
+Inline subentries use punctuation to separate between different subentries on the same line: this field holds the punctuation that demarcates a new subentry. For example, the following index text:
 
 ```xml
  <p class="in">Adams, Henry, <a class="xref" href="ump-taylor02-0013.html#p211">211n83</a>; 
@@ -183,7 +185,7 @@ Inline subentries use punctation to separate between different subentries on the
 would have a value of `:` for __separator_between_subentries__.
 
 !!! Note
-    This field is __only__ used in indexes with inline subentries.  If this value is left blank, the parser will assume that the index contains only separate line subentires
+    This field is __only__ used in indexes with inline subentries.  If this value is left blank, the parser will assume that the index contains only separate line subentries
 
 ---
 
@@ -229,7 +231,7 @@ Functions similarly to [separator_between_sees](#separator_between_sees), but wi
 
 __Field Type__: String
 
-Some inline subenty indexes include both multiple subentries _and_ multiple see relations in a single line.  Even worse, sometimes these are separated by exactly the same punctuation. In those situations, the index will wrap the see in certain punctuation, such as parenthesis. When parsing these situations, the index extractor is looking at the content _stripped of tags_, so for an index with text that looks like this:
+Some inline subentry indexes include both multiple subentries _and_ multiple see relations in a single line.  Even worse, sometimes these are separated by exactly the same punctuation. In those situations, the index will wrap the see in certain punctuation, such as parenthesis. When parsing these situations, the index extractor is looking at the content _stripped of tags_, so for an index with text that looks like this:
 
 ```
 Washington, George, 8, 9, 18, 24, 89, 94, 101, 102, 172, 180n7, 250n29; and Cherry Tree, 68, 77; Presidency of (see American Presidency; Founding Fathers; Constitution), 7, 20, 101, 110, 164, 169. 
@@ -243,7 +245,7 @@ the value of __inline_see_start__ would be `(see`.
 
 __Field Type__: String
 
-This field marks the end of a series of see relations in an inline subentry index.  Using the same example from [inline_see_start](#inline_see_start) above, the value of __inline_see_end__ would be `)`.
+This field marks the end of a series of "see" relations in an inline subentry index.  Using the same example from [inline_see_start](#inline_see_start) above, the value of __inline_see_end__ would be `)`.
 
 ---
 
@@ -267,7 +269,7 @@ Functionally equivalent to [inline_see_end](#inline_see_end) above, but for "see
 
 __Field Type__: Array (String)
 
-Indexes may express occurrences as a range rather than a single page.  __OTL TCT__ extraction, however, only captures the first page, and so this field helps tell the parser to ignore the number at the end of the occurrence range.  Howeer, due to inconsistent formatting, an index may use multiple punctuation types to express a range (for example, both hyphens and em dashes). For such an index, the value of __indicators_of_occurrence_range__ might be `["-", "–"]`.
+Indexes may express occurrences as a range rather than a single page.  __OTL TCT__ extraction, however, only captures the first page, and so this field helps tell the parser to ignore the number at the end of the occurrence range.  However, due to inconsistent formatting, an index may use multiple punctuation types to express a range (for example, both hyphens and em dashes). For such an index, the value of __indicators_of_occurrence_range__ might be `["-", "–"]`.
 
 ---
 
@@ -275,16 +277,16 @@ Indexes may express occurrences as a range rather than a single page.  __OTL TCT
 
 __Field Type__: Array (String)
 
-String that indicates the beginning of a See relation.  Because there can be multiple punctuation styles within a given document, the split strings are an array rather than a single option. Like with [inline_see_start](#inline_see_start), the See items are extracted with tags removed, just looking at the entry as plain text. So, for an entry with the following text:
+String that indicates the beginning of a "see" relation.  Because there can be multiple punctuation styles within a given document, the split strings are an array rather than a single option. Like with [inline_see_start](#inline_see_start), the "see" items are extracted with tags removed, just looking at the entry as plain text. So, for an entry with the following text:
 
 ```
 First President. See Washington, George
 ```
 
-the value of __see_split_string__ would be `. See`.  Note the inclusion of the leading period, which is important for separating a See relation from an entry that has the word "See" in it (such as "The Holy See").
+the value of __see_split_string__ would be `. See`.  Note the inclusion of the leading period, which is important for separating a "see" relation from an entry that has the word "See" in it (such as "The Holy See").
 
 ---
 
 ### see_also_split_string
 
-Same as [see_split_string](#see_split_string), but for "See Also" relations instead of "See" relations.
+Same as [see_split_string](#see_split_string), but for "see also" relations instead of "see" relations.

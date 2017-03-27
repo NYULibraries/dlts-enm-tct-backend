@@ -200,11 +200,11 @@ basket.occurs[...].location.id              | Integer | Internal ID of that page
 basket.occurs[...].location.document.title  | String  | Title of the original source that this occurrence is in
 basket.occurs[...].location.document.author | String  | Author of the original source that this occurrence is in
 basket.occurs[...].location.localid         | String  | Identifier for this particular location (relative to the document).  This __is__ guaranteed to be stable across ingests
-relations                                   | List    | List/Description of all Related Topics
+relations                                   | List    | List/Description of all related topics
 relations[...].ids                          | Integer | Internal ID of this particular relation
-relations[...].basket.id                    | Integer | ID of the Related Topic
-relations[...].basket.display_name          | String  | `display_name` of the Related Topic
-relations[...].relationtype.rtype           | String  | Description of the _kind_ of relation between this topic and the Related Topic
+relations[...].basket.id                    | Integer | ID of the related topic
+relations[...].basket.display_name          | String  | `display_name` of the related topic
+relations[...].relationtype.rtype           | String  | Description of the _kind_ of relation between this topic and the related topic
 relations[...].relationtype.id              | Integer | Internal ID of this particular RelationType
 relations[...].relationtype/role_from       | String  | Description of the role from the source topic to the destination topic. E.g. for a "parent" relationship this might be "parent of"
 relations[...].relationtype/role_to         | String  | Description of the from the destination topic to the source topic.  E.g. for a "parent" relationship this might be "child of"
@@ -345,7 +345,7 @@ Get a list of names by certain characteristics, including starting letter, conta
 /api/hit/hits/search/?letter=#
 ```
 
-However, the names filtering also includes a few additional options, including finding any case-insensitive substring within the name. For example, the query
+However, the name filtering also includes a few additional options, including finding any case-insensitive substring within the name. For example, the query
 
 ```
 /api/hit/hists/search/?name="adams"
