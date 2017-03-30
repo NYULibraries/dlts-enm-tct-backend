@@ -11,7 +11,7 @@ This software is required for proper functioning of the ENM Ingest backend:
     The __ENM Topic Curation Backend__ requires several postgres-specific features, including ArrayFields and column-specific distinct queries.  Subbing in another RDBMS such as SQLite or MySQL will likely render the software inoperable
 
 !!! warning
-    One of the python packages, psycopg2, requires PostgreSQL to be install before installing. Make sure both the above dependencies are installed __before__ installing the python dependencies below
+    One of the python packages, psycopg2, requires PostgreSQL to be present before installing. Make sure both the above dependencies are installed __before__ installing the python dependencies below
 
 ### Python Dependencies
 
@@ -43,7 +43,7 @@ This documentation was built with the [MkDocs](http://www.mkdocs.org/) markdown-
 - Pygments==2.2.0
 - pymdown-extensions==1.8
 
-For convenience, this all can be install via:
+For convenience, this all can be installed via:
 
 ```
 pip install -r requirements-documentation.txt
@@ -51,7 +51,7 @@ pip install -r requirements-documentation.txt
 
 ## Current Production Platform
 
-The following represent the current production environment for running the ENM Topic Curation Backend. These are not required, but having been tested as an effective production system:
+The following represent the current production environment for running the ENM Topic Curation Backend. These are not required, but have been tested as an effective production system:
 
 - __OS__: Ubuntu 16.04
 - __Application Server__: uWSGI

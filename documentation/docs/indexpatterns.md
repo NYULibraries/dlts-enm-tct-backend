@@ -32,10 +32,12 @@ This is a longer, human-readable text description of the IndexPattern. This fiel
 
 __Field Type__: String
 
-XPath term used by lxml specifying a __main__ entry nodes in the index.  For example, an EPUB with the following structure for an index entry:
+XPath term that specifies a __main__ entry node in the index.  For example, an EPUB with the following structure for an index entry:
 
 ```xml
-<p class="indexmain">Washington, George, <a class="nounder" href="ch03.html#page_73">73</a>&#8211;85</p>
+<p class="indexmain">
+    Washington, George, <a class="nounder" href="ch03.html#page_73">73</a>&#8211;85
+</p>
 ```
 
 would have a value of `p[@class="indexmain"]` for __xpath_entry__.
@@ -49,7 +51,9 @@ __Field Type__: Array (string)
 A list of classes used to indicate a subentry in the index, specifically for indexes with separate line subentries.  For example, an index with the following subentry:
 
 ```xml
-<p class="indexsub">Presidency of, <a class="nounder" href="ch04.html#page_109">109</a></p>
+<p class="indexsub">
+    Presidency of, <a class="nounder" href="ch04.html#page_109">109</a>
+</p>
 ```
 
 would have a value of `['indexsub']` for __subentry_classes__.
@@ -66,7 +70,9 @@ __Field Type__: String
 Tag type that encloses a "see" indicator in the EPUB. For example, an index with the following entry
 
 ```xml
-<p class="indexmain">First President. <em>See</em> Washington, George</p>
+<p class="indexmain">
+    First President. <em>See</em> Washington, George
+</p>
 ```
 
 would have a value of `em` for __xpath_see__.
@@ -94,7 +100,20 @@ __Field Type__: Array (String)
 When identifying pages in the text, this is the string used to split an entire page to separate into individual pages. The goal is to have each remaining page string begin with the page number, so the split string should include the tag text that occurs right before the page number.  For example, in an EPUB with the following text:
 
 ```xml
-<p class="indent">Washington was widely admired for his strong leadership qualities and was unanimously elected president by the Electoral College in the first two national elections. He oversaw the creation of a strong, well-financed national government that maintained neutrality in the French Revolutionary Wars, suppressed the Whiskey Rebellion, and won acceptance among Americans of all types.[3] <a id="page_172"></a>Washington's incumbency established many precedents still in use today, such as the cabinet system, the inaugural address, and the title Mr. President.[4][5] His retirement from office after two terms established a tradition that lasted until 1940 when Franklin Delano Roosevelt won an unprecedented third term. The 22nd Amendment (1951) now limits the president to two elected terms.</p>
+<p class="indent">
+    Washington was widely admired for his strong leadership qualities and 
+    was unanimously elected president by the Electoral College in the first 
+    two national elections. He oversaw the creation of a strong, well-
+    financed national government that maintained neutrality in the French 
+    Revolutionary Wars, suppressed the Whiskey Rebellion, and won acceptance 
+    among Americans of all types.[3] <a id="page_172"></a>Washington's 
+    incumbency established many precedents still in use today, such as the 
+    cabinet system, the inaugural address, and the title Mr. President.[4][5] 
+    His retirement from office after two terms established a tradition that 
+    lasted until 1940 when Franklin Delano Roosevelt won an unprecedented 
+    third term. The 22nd Amendment (1951) now limits the president to two 
+    elected terms.
+</p>
 ```
 
 could have a value of `['id="page_']` for __pagenumber_pre_strings__.
@@ -107,7 +126,7 @@ could have a value of `['id="page_']` for __pagenumber_pre_strings__.
 
 __Field Type__: String
 
-An xpath pattern used to find a particular page using xpath in the original text. Any tool using this pattern will use python's string `format` function to construct the specific xpath pattern for that particular page, and should therefore include the characters `{}` or `{0}` where the page number should be inserted. If the page number should be used multiple times in the string, you must use the second version `{0}`.  So, for example, the text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `a[@id="page_{0}"]` for __pagenumber_xpath_patern__.
+An xpath pattern used to find a particular page using xpath in the original text. Any tool using this pattern will use python's string `format` function to construct the specific xpath pattern for that particular page, and should therefore include the characters `{}` or `{0}` where the page number should be inserted. If the page number should be used multiple times in the string, you must use the second version `{0}`.  So, for example, the text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `a[@id="page_{0}"]` for __pagenumber_xpath_pattern__.
 
 ---
 
@@ -123,7 +142,7 @@ This field functions much like the [pagenumber_xpath_pattern](#pagenumber_xpath_
 
 __Field Type__: String
 
-This field functions much like the [pagenumber_xpath_pattern](#pagenumber_xpath_pattern), but instead reconstructs the original page number locator tag as it existed in the original text. For example, the same text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `<a id="page_{0}">` for __pagenumber_tag__pattern__.
+This field functions much like the [pagenumber_xpath_pattern](#pagenumber_xpath_pattern), but instead reconstructs the original page number locator tag as it existed in the original text. For example, the same text from the [pagenumber_pre_strings example](#pagenumber_pre_strings) would have a value of `<a id="page_{0}">` for __pagenumber_tag_pattern__.
 
 ---
 
@@ -134,7 +153,9 @@ __Field Type__: String
 Punctuation used to separate entry text from its occurrences (page numbers). For example, the index entry:
 
 ```xml
-<p class="indexmain">Washington, George, <a class="nounder" href="ch03.html#page_73">73</a>&#8211;85</p>
+<p class="indexmain">
+    Washington, George, <a class="nounder" href="ch03.html#page_73">73</a>&#8211;85
+</p>
 ```
 
 Would have a value of `,` for __separator_between_entry_and_occurrences__.
@@ -148,7 +169,9 @@ __Field Type__: String
 Xpath used to find occurence (page number) links within an entry. For example, the index entry:
 
 ```xml
-<p class="indexmain">Washington, George, <a class="nounder" href="ch03.html#page_73">73</a>&#8211;85</p>
+<p class="indexmain">
+    Washington, George, <a class="nounder" href="ch03.html#page_73">73</a>&#8211;85
+</p>
 ```
 
 would have a value of `a[@href]` for __xpath_occurence_link__.
@@ -162,7 +185,9 @@ __Field Type__: String
 Some indexes with separate line subentries will put the first subentry on the same line as the main entry (particularly if the main entry itself has no occurrences). The punctuation mark in __separator_before_first_subentry__ is used to separate between the main entry text and the first subentry text in these instances. For example, the entry
 
 ```xml
-<p class="indexmain"><em>Washington, George</em>: and Cherry Tree, <a class="nounder" href="ch02.html#page_74">74</a>&#8211;5;</p>
+<p class="indexmain">
+    Washington, George: and Cherry Tree, <a class="nounder" href="ch02.html#page_74">74</a>&#8211;5;
+</p>
 ```
 
 would have a value of `:` for __separator_before_first_subentry__.
@@ -177,12 +202,13 @@ Inline subentries use punctuation to separate between different subentries on th
 
 ```xml
  <p class="in">Adams, Henry, <a class="xref" href="ump-taylor02-0013.html#p211">211n83</a>; 
-    apocalyptic view of the future, <a class="xref" href="ump-taylor02-0008.html#p60">60</a>, <a class="xref" href="ump-taylor02-0008.html#p65">65</a>;
+    apocalyptic view of the future, <a class="xref" href="ump-taylor02-0008.html#p60">60</a>, 
+    <a class="xref" href="ump-taylor02-0008.html#p65">65</a>;
     boundary of life and death blurred in, <a class="xref" href="ump-taylor02-0008.html#p57">57</a>.
 </p>
 ```
 
-would have a value of `:` for __separator_between_subentries__.
+would have a value of `;` for __separator_between_subentries__.
 
 !!! Note
     This field is __only__ used in indexes with inline subentries.  If this value is left blank, the parser will assume that the index contains only separate line subentries
@@ -196,7 +222,8 @@ __Field Type__: String
 Punctuation used to separate multiple "see" targets in an index. For example, the entry 
 
 ```xml
-<p class="indexsub">Washington, George, <a class="nounder" href="ch02.html#page_39">39</a>&#8211;41. 
+<p class="indexsub">
+    Washington, George, <a class="nounder" href="ch02.html#page_39">39</a>&#8211;41. 
     <em>See</em> American Presidency; Founding Fathers; Cannot Tell a Lie
 </p>
 ```
@@ -212,7 +239,10 @@ __Field Type__: String
 A "see" relation might point to a subentry, rather than the main entry of a text.  In those cases, this punctuation is used to indicate the difference between the main entry and subentry text in the target subentry.  For example, in the entry:
 
 ```xml
-<p class="indexmain">Truthfulness in politics, <a class="nounder" href="ch02.html#page_51">51</a>&#8211;52. <em>See also</em> Washington, and Cherry Tree</p>
+<p class="indexmain">
+    Truthfulness in politics, <a class="nounder" href="ch02.html#page_51">51</a>&#8211;52. 
+    <em>See also</em> Washington, and Cherry Tree
+</p>
 ```
 
 the target is not the main topic __Washington, and Cherry Tree__ but the subentry __and Cherry Tree__ of the main entry __Washington__. In this case, the value of __separator_see_subentry__ would be `,`.
@@ -234,7 +264,9 @@ __Field Type__: String
 Some inline subentry indexes include both multiple subentries _and_ multiple see relations in a single line.  Even worse, sometimes these are separated by exactly the same punctuation. In those situations, the index will wrap the see in certain punctuation, such as parenthesis. When parsing these situations, the index extractor is looking at the content _stripped of tags_, so for an index with text that looks like this:
 
 ```
-Washington, George, 8, 9, 18, 24, 89, 94, 101, 102, 172, 180n7, 250n29; and Cherry Tree, 68, 77; Presidency of (see American Presidency; Founding Fathers; Constitution), 7, 20, 101, 110, 164, 169. 
+Washington, George, 8, 9, 18, 24, 89, 94, 101, 102, 172, 180n7, 250n29; 
+and Cherry Tree, 68, 77; 
+Presidency of (see American Presidency; Founding Fathers; Constitution), 7, 20, 101, 110, 164, 169. 
 ```
 
 the value of __inline_see_start__ would be `(see`.

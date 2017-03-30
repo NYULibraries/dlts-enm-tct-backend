@@ -73,7 +73,8 @@ class ReviewAllHitsView(generics.ListAPIView):
     serializer_class = HitListWithReviewSerializer
     queryset = Hit.objects.all().select_related(
         'scope', 
-        'basket__review').filter(bypass=False)
+        'basket__review',
+        'basket__review__reviewer').filter(bypass=False)
 
 
 class ReviewHitSearchView(HitSearchView):
@@ -83,7 +84,8 @@ class ReviewHitSearchView(HitSearchView):
     serializer_class = HitListWithReviewSerializer 
     queryset = Hit.objects.all().select_related(
         'scope', 
-        'basket__review').filter(bypass=False)
+        'basket__review',
+        'basket__review__reviewer').filter(bypass=False)
 
 
 class AllReportsView(generics.ListAPIView):

@@ -46,39 +46,39 @@ def lex_slugify(value):
 
     # Load the list of stop words.
 
-    stopwords = set([slugify(stopword_object.word) for stopword_object in StopWord.objects.all()])
+    stopwords = set([slugify(stopword_object.word, allow_unicode=True) for stopword_object in StopWord.objects.all()])
 
     # Reload the irregular list, because any word can have a translation.
     # Load the irregular dictionary mapping an irregular word to a token.
 
     irregular = {}
     for word in Irregular.objects.all():
-        irregular[slugify(word.word)] = slugify(word.token)
+        irregular[slugify(word.word, allow_unicode=True)] = slugify(word.token, allow_unicode=True)
 
-    expression_list = [slugify(e.expression) for e in Expression.objects.all()]
+    expression_list = [slugify(e.expression, allow_unicode=True) for e in Expression.objects.all()]
 
     # If unicode characters don't convert into Ascii, string becomes null.
     # If it's null, skip slugify.
     saved_value = value
-    value = slugify(value)
+    value = slugify(value, allow_unicode=True)
     if value == '':
         value = "{}".format(saved_value.encode('utf-8'))
 
     # If the name is exactly the same as one of the expression.
     # Checking if the value has the same slug as one of the expressions.
     if value in expression_list:
-        slugified = slugify(value)
+        slugified = slugify(value, allow_unicode=True)
         value = value.replace(slugified, ''.join(slugified.split('-')))
     else:
         # Look at all expressions. Slugify them.
         for expression in Expression.objects.all():
 
-            slugified = slugify(expression.expression)
+            slugified = slugify(expression.expression, allow_unicode=True)
             # Look if the value is contained in one of the expressions.
             if slugified in value:
                 value = value.replace(slugified, ''.join(slugified.split('-')))
 
-    slug_result = slugify(value)
+    slug_result = slugify(value, allow_unicode=True)
 
     # Now split again the result into a list of words
 

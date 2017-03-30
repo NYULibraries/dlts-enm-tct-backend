@@ -4,5 +4,5 @@ The __Enhanced Networked Monographs Topic Curation Toolkit__ is software for cre
 
 - Automatically parse EPUB index into distinct topics
 - Curate the results of the automatic ingest, giving you the tools to manage your integrated index
-- Link topics to their original intances in the source material, across all sources
+- Link topics to their original instances in the source material, across all sources
 - Output the topic graph in a variety of formats

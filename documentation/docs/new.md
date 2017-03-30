@@ -26,9 +26,9 @@ Whether you are creating a new Indexpattern or re-using the older, once you have
     '0123456789999': 'nyup1',
 ```
 
-## Locate the Index ID in the manifest
+## Locate the Index ID in the package document
 
-Inside the unzipped EPUB document, locate the _EPUB manifest_. This file, usually (but not exclusively) a .opf file, will list the contents and ordering of the EPUB document. Locate the index(es) in the list of `<item>` tags, and note the id attribute on that tag. That id must be added to the `initial/index_ids.py` dictionary. The structure is much like that on the `pattern_mapping` dictionary, so an EPUB with the filename _0123456789999.epub_ and an index id of _ch09index.html_ would require the following line to the index_ids dictionary:
+Inside the unzipped EPUB document, locate the _EPUB package document_. This file, usually (but not exclusively) a .opf file, will list the contents and ordering of the EPUB document. Locate the index(es) in the list of `<item>` tags, and note the id attribute on that tag. That id must be added to the `initial/index_ids.py` dictionary. The structure is much like that on the `pattern_mapping` dictionary, so an EPUB with the filename _0123456789999.epub_ and an index id of _ch09index.html_ would require the following line to the index_ids dictionary:
 
 ```python
     '0123456789999': 'ch09index.html',

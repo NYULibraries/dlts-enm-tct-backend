@@ -26,7 +26,7 @@ class Ttype(models.Model):
     Topic Type
     """
 
-    ttype = models.CharField(max_length=30, unique=True)
+    ttype = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.ttype

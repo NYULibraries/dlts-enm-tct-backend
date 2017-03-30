@@ -16,6 +16,9 @@ DATABASES = {
 }
 ```
 
+!!! warning
+    As you can see from the settings here, the database password is currently stored in cleartext in the repo.  Make sure to change the database password in production.
+
 ### Secret Keys
 
 __ENM Topic Curation Toolkit Backend__ requires a file `nyu/secret_keys.json` with the following structure:
@@ -46,7 +49,7 @@ sudo psql nyuotl_db < DUMP_FILE_NAME.sql
 If you have changed the name of the database in the settings file, make sure to use the new database name instead of `nyuotl_db`.
 
 !!! warning
-    This import process is requires an empty database. Running this command on a database with already existing data may result in duplicate data or data corruption.
+    This import process requires an empty database. Running this command on a database with already existing data may result in duplicate data or data corruption.
 
 ### Batch Ingest
 

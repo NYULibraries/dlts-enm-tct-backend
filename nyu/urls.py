@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^admin/', include(nyu_admin.urls)),
     url(r'^api/review/', include('otx_review.api_urls')),
     url(r'^api/epub/', include('manuscripts.api_urls')),
+    url(r'^api/reconciliation/', include('reconciliation.api_urls')),
+    url(r'^api/weblink/', include('otx_weblink.api_urls')),
     url(r'^api/', include('otcore.api_urls')),
     url(r'^rest-auth/', include('rest_auth.urls'))
 ]

@@ -53,7 +53,7 @@ Field          | Type    | Description
 id             | Integer | Internal id and primary identifier for each EPUB 
 title          | String  | Title of the EPUB
 author         | String  | Author of the EPUB
-publisher      | String  | Publisher of the EPUB.  Note that this information is extracted from the text itself, and may not be exact string matches across EPUBs for any given publisher (as you can see in the example above, which has three different ways of referring to NYU Press)
+publisher      | String  | Publisher of the EPUB. See our [note](overview) about ISBN numbers on the Overview page
 isbn           | String  | ISBN number for the book. Note that this is extracted from the EPUB filename, not extracted from any metadata from the book itself. Be aware of this limitation in future ingests
 
 ---
@@ -121,8 +121,9 @@ id                              | Integer | Internal id and primary identifier f
 title                           | String  | Title of the EPUB
 author                          | String  | Author of the EPUB 
 epub                            | String  | Publisher of the EPUB. See [All EPUBs](#all-epubs) for note about consistency.
-isbn                            | String  | ISBN number for the book. See [All EPUBs](#all-epubs) for note about sourcing.
-locations[...].id               | Integer | Internal id and primary identifier for each page. Usual caveats regarding IDs apply
+isbn                            | String  | ISBN number for the book. See [the API Overview](overview) for note about sourcing
+
+locations[...].id               | Integer | Internal id and primary identifier for each page. [Usual caveats](overview) regarding IDs apply
 locations[...].localid          | String  | Human-readable representation of the page number
 locations[...].sequence_number  | Integer | Number used for properly ordering pages in a book 
 locations[...].content          | String  | Excerpt of the content from the page (roughly the first 100 characters) 
@@ -211,7 +212,7 @@ document.id                           | Integer | Internal id and primary identi
 document.title                        | String  | Title of the EPUB
 document.author                       | String  | Author of the EPUB
 document.epub                         | String  | Publisher of the EPUB. See [All EPUBs](#all-epubs) for note about consistency.
-document.isbn                         | String  | ISBN number for the book. See [All EPUBs](#all-epubs) for note about sourcing.
+document.isbn                         | String  | ISBN number for the book. See [the API Overview](overview) for note about sourcing
 context                               | String  | Not used in Enhanced Network Monographs
 occurrences                           | List    | All the topics on this page
 occurrences[...].id                   | Integer | Internal id for this occurrence

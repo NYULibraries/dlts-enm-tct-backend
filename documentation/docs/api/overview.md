@@ -6,7 +6,7 @@ In order to make this documentation as flexible as possible, all API endpoints a
 /api/hit/basket/all/
 ```
 
-If the api were at `http://api.enhanced-network-monographs.com` (just, to be clear, a totally invented url), the full URL to access the above endpoint would be:
+If the api were at `http://api.enhanced-network-monographs.com/` (just to be clear, a totally invented url), the full URL to access the above endpoint would be:
 
 ```
 http://api.enhanced-network-monographs.com/api/hit/basket/all
@@ -17,6 +17,9 @@ http://api.enhanced-network-monographs.com/api/hit/basket/all
 
 !!! warning "IDs and Consistency"
     Most objects in the database have an `id` attribute. IDs are guaranteed to be unique for that particular resource in a database: only one `basket` object will have an ID of __10__, for example.  However, the system does __not__ guarantee that IDs will be consistent across databases.  In other words, if an ingest is done from scratch on a new system (rather than importing a database copy), IDs may not match those from a different ingest.
+
+!!! warning "ISBN Numbers"
+    Many of the endpoints including EPUB info include an "isbn" field. This field is populated from the EPUB filename, rather than extracted from the EPUB metadata. Should an ingested EPUB not use its ISBN number has a filename, this field will no longer be accurate.
 
 ## API Categories
 

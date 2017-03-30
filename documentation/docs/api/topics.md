@@ -4,7 +4,7 @@ Description                         | Endpoint                                  
 ----------------------------------  | ---------------------------------------------------------   | ----------------
 List of All Topics                  | [/api/hit/basket/all/](#all-topics)                         |
 List of Subset of Topics            | [/api/hit/basket/search/](#topic-subset)                    | letter, document
-Topic Detail                        | [/api/hit/basket/BASKET_ID/](#topic-detail)             | 
+Topic Detail                        | [/api/hit/basket/BASKET_ID/](#topic-detail)                 | 
 All Topics (with review data)       | [/api/review/baskets/all](#topics-with-review)              | 
 Subset of Topics (with review data) | [/api/review/baskets/search](#reviewed-topics-subset)       | letter, document
 List of All Names                   | [/api/hit/hits/all/](#all-names)                            | 
@@ -189,7 +189,7 @@ basket.topic_hits                           | List    | List of names on the top
 basket.topic_hits[...].id                   | Integer | Internal id of that particular name. Like the Topic ID, it's stable within a database, but not guaranteed to be consistent across databases or re-ingests
 basket.topic_hits[...].name                 | String  | Name string of a single topic name
 basket.topic_hits[...].scope.id             | Integer | Internal ID of the scope
-basket.topic_hits[...].scope/scope          | String  | String/text representation of the scope of that name.  Default scope is "Generic"
+basket.topic_hits[...].scope.scope          | String  | String/text representation of the scope of that name.  Default scope is "Generic"
 basket.topic_hits[...].bypass               | Boolean | If set to True, this prevents a name from being reprocessed when re-ingesting material. Used for certain kinds of automatic processing, but it's not used in the current iteration of _Enhanced Network Monographs_
 basket.topic_hits[...].hidden               | Boolean | If set to True, this name is saved on a topic but is not displayed in output.  Not currrently used in this iteration of _Enhanced Network Monographs_
 basket.topic_hits[...].preferred            | Boolean | Indicates whether this hit should be used for the current topics `display_name`. If not name as `preferred=True`, then the longest name will be used as the `display_name` for that topic
@@ -206,9 +206,9 @@ relations[...].basket.id                    | Integer | ID of the related topic
 relations[...].basket.display_name          | String  | `display_name` of the related topic
 relations[...].relationtype.rtype           | String  | Description of the _kind_ of relation between this topic and the related topic
 relations[...].relationtype.id              | Integer | Internal ID of this particular RelationType
-relations[...].relationtype/role_from       | String  | Description of the role from the source topic to the destination topic. E.g. for a "parent" relationship this might be "parent of"
-relations[...].relationtype/role_to         | String  | Description of the from the destination topic to the source topic.  E.g. for a "parent" relationship this might be "child of"
-relations[...].relationtype/symmetrical     | Boolean | Indicates whether or not this RelationType is symmetrical.  Another way of saying that "role_to" and "role_form" (described above) are equivalent.
+relations[...].relationtype.role_from       | String  | Description of the role from the source topic to the destination topic. E.g. for a "parent" relationship this might be "parent of"
+relations[...].relationtype.role_to         | String  | Description of the from the destination topic to the source topic.  E.g. for a "parent" relationship this might be "child of"
+relations[...].relationtype.symmetrical     | Boolean | Indicates whether or not this RelationType is symmetrical.  Another way of saying that "role_to" and "role_form" (described above) are equivalent.
 relations[...].direction                    | String  | Describes whether the current topic is the "source" (e.g. uses the "role_to" description above) or the "destination" (e.g. uses the "role_from" description above) of the given relationship. Important for noting the directionality of non-symmetrical relationships
 
 ---

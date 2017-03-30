@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
-    'manuscripts',
     'corsheaders',
+    'manuscripts',
+    'reconciliation',
     'otx_xml',
     'otx_epub',
     'otx_review',
+    'otx_weblink',
 ] + get_otcore_apps()
 
 MIDDLEWARE_CLASSES = [
