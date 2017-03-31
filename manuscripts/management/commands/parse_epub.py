@@ -5,7 +5,7 @@ from otcore.relation.processing import global_containment
 from otx_epub.models import Epub
 from manuscripts.extractors import IndexExtractor
 from manuscripts.processing import nyu_global_multiple_tokens
-from mauscripts.cleaning import full_clean
+from manuscripts.cleaning import full_clean
 
 
 class Command(BaseCommand):
