@@ -750,8 +750,10 @@
 <hr />
 <h3 id="xpath_entry">xpath_entry</h3>
 <p><strong>Field Type</strong>: String</p>
-<p>XPath term used by lxml specifying a <strong>main</strong> entry nodes in the index.  For example, an EPUB with the following structure for an index entry:</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch03.html#page_73&quot;</span><span class="nt">&gt;</span>73<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>85<span class="nt">&lt;/p&gt;</span>
+<p>XPath term that specifies a <strong>main</strong> entry node in the index.  For example, an EPUB with the following structure for an index entry:</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>
+    Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch03.html#page_73&quot;</span><span class="nt">&gt;</span>73<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>85
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -760,7 +762,9 @@
 <h3 id="subentry_classes">subentry_classes</h3>
 <p><strong>Field Type</strong>: Array (string)</p>
 <p>A list of classes used to indicate a subentry in the index, specifically for indexes with separate line subentries.  For example, an index with the following subentry:</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexsub&quot;</span><span class="nt">&gt;</span>Presidency of, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch04.html#page_109&quot;</span><span class="nt">&gt;</span>109<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexsub&quot;</span><span class="nt">&gt;</span>
+    Presidency of, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch04.html#page_109&quot;</span><span class="nt">&gt;</span>109<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -773,7 +777,9 @@
 <h3 id="xpath_see">xpath_see</h3>
 <p><strong>Field Type</strong>: String</p>
 <p>Tag type that encloses a "see" indicator in the EPUB. For example, an index with the following entry</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>First President. <span class="nt">&lt;em&gt;</span>See<span class="nt">&lt;/em&gt;</span> Washington, George<span class="nt">&lt;/p&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>
+    First President. <span class="nt">&lt;em&gt;</span>See<span class="nt">&lt;/em&gt;</span> Washington, George
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -791,7 +797,20 @@
 <h3 id="pagenumber_pre_strings">pagenumber_pre_strings</h3>
 <p><strong>Field Type</strong>: Array (String)</p>
 <p>When identifying pages in the text, this is the string used to split an entire page to separate into individual pages. The goal is to have each remaining page string begin with the page number, so the split string should include the tag text that occurs right before the page number.  For example, in an EPUB with the following text:</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indent&quot;</span><span class="nt">&gt;</span>Washington was widely admired for his strong leadership qualities and was unanimously elected president by the Electoral College in the first two national elections. He oversaw the creation of a strong, well-financed national government that maintained neutrality in the French Revolutionary Wars, suppressed the Whiskey Rebellion, and won acceptance among Americans of all types.[3] <span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;page_172&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>Washington&#39;s incumbency established many precedents still in use today, such as the cabinet system, the inaugural address, and the title Mr. President.[4][5] His retirement from office after two terms established a tradition that lasted until 1940 when Franklin Delano Roosevelt won an unprecedented third term. The 22nd Amendment (1951) now limits the president to two elected terms.<span class="nt">&lt;/p&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indent&quot;</span><span class="nt">&gt;</span>
+    Washington was widely admired for his strong leadership qualities and 
+    was unanimously elected president by the Electoral College in the first 
+    two national elections. He oversaw the creation of a strong, well-
+    financed national government that maintained neutrality in the French 
+    Revolutionary Wars, suppressed the Whiskey Rebellion, and won acceptance 
+    among Americans of all types.[3] <span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;page_172&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>Washington&#39;s 
+    incumbency established many precedents still in use today, such as the 
+    cabinet system, the inaugural address, and the title Mr. President.[4][5] 
+    His retirement from office after two terms established a tradition that 
+    lasted until 1940 when Franklin Delano Roosevelt won an unprecedented 
+    third term. The 22nd Amendment (1951) now limits the president to two 
+    elected terms.
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -800,7 +819,7 @@
 <hr />
 <h3 id="pagenumber_xpath_pattern">pagenumber_xpath_pattern</h3>
 <p><strong>Field Type</strong>: String</p>
-<p>An xpath pattern used to find a particular page using xpath in the original text. Any tool using this pattern will use python's string <code>format</code> function to construct the specific xpath pattern for that particular page, and should therefore include the characters <code>{}</code> or <code>{0}</code> where the page number should be inserted. If the page number should be used multiple times in the string, you must use the second version <code>{0}</code>.  So, for example, the text from the <a href="#pagenumber_pre_strings">pagenumber_pre_strings example</a> would have a value of <code>a[@id="page_{0}"]</code> for <strong>pagenumber_xpath_patern</strong>.</p>
+<p>An xpath pattern used to find a particular page using xpath in the original text. Any tool using this pattern will use python's string <code>format</code> function to construct the specific xpath pattern for that particular page, and should therefore include the characters <code>{}</code> or <code>{0}</code> where the page number should be inserted. If the page number should be used multiple times in the string, you must use the second version <code>{0}</code>.  So, for example, the text from the <a href="#pagenumber_pre_strings">pagenumber_pre_strings example</a> would have a value of <code>a[@id="page_{0}"]</code> for <strong>pagenumber_xpath_pattern</strong>.</p>
 <hr />
 <h3 id="pagenumber_css_selector_pattern">pagenumber_css_selector_pattern</h3>
 <p><strong>Field Type</strong>: String</p>
@@ -808,12 +827,14 @@
 <hr />
 <h3 id="pagenumber_tag_pattern">pagenumber_tag_pattern</h3>
 <p><strong>Field Type</strong>: String</p>
-<p>This field functions much like the <a href="#pagenumber_xpath_pattern">pagenumber_xpath_pattern</a>, but instead reconstructs the original page number locator tag as it existed in the original text. For example, the same text from the <a href="#pagenumber_pre_strings">pagenumber_pre_strings example</a> would have a value of <code>&lt;a id="page_{0}"&gt;</code> for <strong>pagenumber_tag</strong>pattern__.</p>
+<p>This field functions much like the <a href="#pagenumber_xpath_pattern">pagenumber_xpath_pattern</a>, but instead reconstructs the original page number locator tag as it existed in the original text. For example, the same text from the <a href="#pagenumber_pre_strings">pagenumber_pre_strings example</a> would have a value of <code>&lt;a id="page_{0}"&gt;</code> for <strong>pagenumber_tag_pattern</strong>.</p>
 <hr />
 <h3 id="separator_between_entry_and_occurrences">separator_between_entry_and_occurrences</h3>
 <p><strong>Field Type</strong>: String</p>
 <p>Punctuation used to separate entry text from its occurrences (page numbers). For example, the index entry:</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch03.html#page_73&quot;</span><span class="nt">&gt;</span>73<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>85<span class="nt">&lt;/p&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>
+    Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch03.html#page_73&quot;</span><span class="nt">&gt;</span>73<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>85
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -822,7 +843,9 @@
 <h3 id="xpath_occurrence_link">xpath_occurrence_link</h3>
 <p><strong>Field Type</strong>: String</p>
 <p>Xpath used to find occurence (page number) links within an entry. For example, the index entry:</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch03.html#page_73&quot;</span><span class="nt">&gt;</span>73<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>85<span class="nt">&lt;/p&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>
+    Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch03.html#page_73&quot;</span><span class="nt">&gt;</span>73<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>85
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -831,7 +854,9 @@
 <h3 id="separator_before_first_subentry">separator_before_first_subentry</h3>
 <p><strong>Field Type</strong>: String</p>
 <p>Some indexes with separate line subentries will put the first subentry on the same line as the main entry (particularly if the main entry itself has no occurrences). The punctuation mark in <strong>separator_before_first_subentry</strong> is used to separate between the main entry text and the first subentry text in these instances. For example, the entry</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;&lt;em&gt;</span>Washington, George<span class="nt">&lt;/em&gt;</span>: and Cherry Tree, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch02.html#page_74&quot;</span><span class="nt">&gt;</span>74<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>5;<span class="nt">&lt;/p&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>
+    Washington, George: and Cherry Tree, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch02.html#page_74&quot;</span><span class="nt">&gt;</span>74<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>5;
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -841,13 +866,14 @@
 <p><strong>Field Type</strong>: String</p>
 <p>Inline subentries use punctuation to separate between different subentries on the same line: this field holds the punctuation that demarcates a new subentry. For example, the following index text:</p>
 <div class="codehilite"><pre><span></span> <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;in&quot;</span><span class="nt">&gt;</span>Adams, Henry, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;xref&quot;</span> <span class="na">href=</span><span class="s">&quot;ump-taylor02-0013.html#p211&quot;</span><span class="nt">&gt;</span>211n83<span class="nt">&lt;/a&gt;</span>; 
-    apocalyptic view of the future, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;xref&quot;</span> <span class="na">href=</span><span class="s">&quot;ump-taylor02-0008.html#p60&quot;</span><span class="nt">&gt;</span>60<span class="nt">&lt;/a&gt;</span>, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;xref&quot;</span> <span class="na">href=</span><span class="s">&quot;ump-taylor02-0008.html#p65&quot;</span><span class="nt">&gt;</span>65<span class="nt">&lt;/a&gt;</span>;
+    apocalyptic view of the future, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;xref&quot;</span> <span class="na">href=</span><span class="s">&quot;ump-taylor02-0008.html#p60&quot;</span><span class="nt">&gt;</span>60<span class="nt">&lt;/a&gt;</span>, 
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;xref&quot;</span> <span class="na">href=</span><span class="s">&quot;ump-taylor02-0008.html#p65&quot;</span><span class="nt">&gt;</span>65<span class="nt">&lt;/a&gt;</span>;
     boundary of life and death blurred in, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;xref&quot;</span> <span class="na">href=</span><span class="s">&quot;ump-taylor02-0008.html#p57&quot;</span><span class="nt">&gt;</span>57<span class="nt">&lt;/a&gt;</span>.
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
-<p>would have a value of <code>:</code> for <strong>separator_between_subentries</strong>.</p>
+<p>would have a value of <code>;</code> for <strong>separator_between_subentries</strong>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This field is <strong>only</strong> used in indexes with inline subentries.  If this value is left blank, the parser will assume that the index contains only separate line subentries</p>
@@ -856,7 +882,8 @@
 <h3 id="separator_between_sees">separator_between_sees</h3>
 <p><strong>Field Type</strong>: String</p>
 <p>Punctuation used to separate multiple "see" targets in an index. For example, the entry </p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexsub&quot;</span><span class="nt">&gt;</span>Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch02.html#page_39&quot;</span><span class="nt">&gt;</span>39<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>41. 
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexsub&quot;</span><span class="nt">&gt;</span>
+    Washington, George, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch02.html#page_39&quot;</span><span class="nt">&gt;</span>39<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>41. 
     <span class="nt">&lt;em&gt;</span>See<span class="nt">&lt;/em&gt;</span> American Presidency; Founding Fathers; Cannot Tell a Lie
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
@@ -867,7 +894,10 @@
 <h3 id="separator_see_subentry">separator_see_subentry</h3>
 <p><strong>Field Type</strong>: String</p>
 <p>A "see" relation might point to a subentry, rather than the main entry of a text.  In those cases, this punctuation is used to indicate the difference between the main entry and subentry text in the target subentry.  For example, in the entry:</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>Truthfulness in politics, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch02.html#page_51&quot;</span><span class="nt">&gt;</span>51<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>52. <span class="nt">&lt;em&gt;</span>See also<span class="nt">&lt;/em&gt;</span> Washington, and Cherry Tree<span class="nt">&lt;/p&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;indexmain&quot;</span><span class="nt">&gt;</span>
+    Truthfulness in politics, <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;nounder&quot;</span> <span class="na">href=</span><span class="s">&quot;ch02.html#page_51&quot;</span><span class="nt">&gt;</span>51<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;#8211;</span>52. 
+    <span class="nt">&lt;em&gt;</span>See also<span class="nt">&lt;/em&gt;</span> Washington, and Cherry Tree
+<span class="nt">&lt;/p&gt;</span>
 </pre></div>
 
 
@@ -880,7 +910,9 @@
 <h3 id="inline_see_start">inline_see_start</h3>
 <p><strong>Field Type</strong>: String</p>
 <p>Some inline subentry indexes include both multiple subentries <em>and</em> multiple see relations in a single line.  Even worse, sometimes these are separated by exactly the same punctuation. In those situations, the index will wrap the see in certain punctuation, such as parenthesis. When parsing these situations, the index extractor is looking at the content <em>stripped of tags</em>, so for an index with text that looks like this:</p>
-<div class="codehilite"><pre><span></span>Washington, George, 8, 9, 18, 24, 89, 94, 101, 102, 172, 180n7, 250n29; and Cherry Tree, 68, 77; Presidency of (see American Presidency; Founding Fathers; Constitution), 7, 20, 101, 110, 164, 169. 
+<div class="codehilite"><pre><span></span>Washington, George, 8, 9, 18, 24, 89, 94, 101, 102, 172, 180n7, 250n29; 
+and Cherry Tree, 68, 77; 
+Presidency of (see American Presidency; Founding Fathers; Constitution), 7, 20, 101, 110, 164, 169. 
 </pre></div>
 
 

@@ -438,7 +438,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>One of the python packages, psycopg2, requires PostgreSQL to be install before installing. Make sure both the above dependencies are installed <strong>before</strong> installing the python dependencies below</p>
+<p>One of the python packages, psycopg2, requires PostgreSQL to be present before installing. Make sure both the above dependencies are installed <strong>before</strong> installing the python dependencies below</p>
 </div>
 <h3 id="python-dependencies">Python Dependencies</h3>
 <p>The main python dependencies can be installed from the <code>requirements.txt</code> file, which includes the specific version numbers used in development and production. You can simply install all required python libraries by type:</p>
@@ -468,13 +468,13 @@
 <li>Pygments==2.2.0</li>
 <li>pymdown-extensions==1.8</li>
 </ul>
-<p>For convenience, this all can be install via:</p>
+<p>For convenience, this all can be installed via:</p>
 <div class="codehilite"><pre><span></span>pip install -r requirements-documentation.txt
 </pre></div>
 
 
 <h2 id="current-production-platform">Current Production Platform</h2>
-<p>The following represent the current production environment for running the ENM Topic Curation Backend. These are not required, but having been tested as an effective production system:</p>
+<p>The following represent the current production environment for running the ENM Topic Curation Backend. These are not required, but have been tested as an effective production system:</p>
 <ul>
 <li><strong>OS</strong>: Ubuntu 16.04</li>
 <li><strong>Application Server</strong>: uWSGI</li>

@@ -682,7 +682,7 @@
 <tr>
 <td>publisher</td>
 <td>String</td>
-<td>Publisher of the EPUB.  Note that this information is extracted from the text itself, and may not be exact string matches across EPUBs for any given publisher (as you can see in the example above, which has three different ways of referring to NYU Press)</td>
+<td>Publisher of the EPUB. See our <a href="../overview">note</a> about ISBN numbers on the Overview page</td>
 </tr>
 <tr>
 <td>isbn</td>
@@ -775,30 +775,14 @@
 <tr>
 <td>isbn</td>
 <td>String</td>
-<td>ISBN number for the book. See <a href="#all-epubs">All EPUBs</a> for note about sourcing.</td>
-</tr>
-<tr>
-<td>locations[...].id</td>
-<td>Integer</td>
-<td>Internal id and primary identifier for each page. Usual caveats regarding IDs apply</td>
-</tr>
-<tr>
-<td>locations[...].localid</td>
-<td>String</td>
-<td>Human-readable representation of the page number</td>
-</tr>
-<tr>
-<td>locations[...].sequence_number</td>
-<td>Integer</td>
-<td>Number used for properly ordering pages in a book</td>
-</tr>
-<tr>
-<td>locations[...].content</td>
-<td>String</td>
-<td>Excerpt of the content from the page (roughly the first 100 characters)</td>
+<td>ISBN number for the book. See <a href="../overview">the API Overview</a> for note about sourcing</td>
 </tr>
 </tbody>
 </table>
+<p>locations[...].id               | Integer | Internal id and primary identifier for each page. <a href="../overview">Usual caveats</a> regarding IDs apply
+locations[...].localid          | String  | Human-readable representation of the page number
+locations[...].sequence_number  | Integer | Number used for properly ordering pages in a book 
+locations[...].content          | String  | Excerpt of the content from the page (roughly the first 100 characters) </p>
 <hr />
 <h2 id="single-page">Single Page</h2>
 <p>Contents information on a single page, including the pages full textual content and all occurrences at that particular page.</p>
@@ -920,7 +904,7 @@
 <tr>
 <td>document.isbn</td>
 <td>String</td>
-<td>ISBN number for the book. See <a href="#all-epubs">All EPUBs</a> for note about sourcing.</td>
+<td>ISBN number for the book. See <a href="../overview">the API Overview</a> for note about sourcing</td>
 </tr>
 <tr>
 <td>context</td>

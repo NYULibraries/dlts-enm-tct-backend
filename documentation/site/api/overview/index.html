@@ -391,7 +391,7 @@
 </pre></div>
 
 
-<p>If the api were at <code>http://api.enhanced-network-monographs.com</code> (just, to be clear, a totally invented url), the full URL to access the above endpoint would be:</p>
+<p>If the api were at <code>http://api.enhanced-network-monographs.com/</code> (just to be clear, a totally invented url), the full URL to access the above endpoint would be:</p>
 <div class="codehilite"><pre><span></span>http://api.enhanced-network-monographs.com/api/hit/basket/all
 </pre></div>
 
@@ -403,6 +403,10 @@
 <div class="admonition warning">
 <p class="admonition-title">IDs and Consistency</p>
 <p>Most objects in the database have an <code>id</code> attribute. IDs are guaranteed to be unique for that particular resource in a database: only one <code>basket</code> object will have an ID of <strong>10</strong>, for example.  However, the system does <strong>not</strong> guarantee that IDs will be consistent across databases.  In other words, if an ingest is done from scratch on a new system (rather than importing a database copy), IDs may not match those from a different ingest.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">ISBN Numbers</p>
+<p>Many of the endpoints including EPUB info include an "isbn" field. This field is populated from the EPUB filename, rather than extracted from the EPUB metadata. Should an ingested EPUB not use its ISBN number as a filename, this field will no longer be accurate.</p>
 </div>
 <h2 id="api-categories">API Categories</h2>
 <ul>

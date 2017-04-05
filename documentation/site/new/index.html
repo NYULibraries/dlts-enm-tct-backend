@@ -240,8 +240,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#locate-the-index-id-in-the-manifest" title="Locate the Index ID in the manifest" class="md-nav__link">
-    Locate the Index ID in the manifest
+  <a href="#locate-the-index-id-in-the-package-document" title="Locate the Index ID in the package document" class="md-nav__link">
+    Locate the Index ID in the package document
   </a>
   
 </li>
@@ -385,8 +385,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#locate-the-index-id-in-the-manifest" title="Locate the Index ID in the manifest" class="md-nav__link">
-    Locate the Index ID in the manifest
+  <a href="#locate-the-index-id-in-the-package-document" title="Locate the Index ID in the package document" class="md-nav__link">
+    Locate the Index ID in the package document
   </a>
   
 </li>
@@ -433,8 +433,8 @@
 </pre></div>
 
 
-<h2 id="locate-the-index-id-in-the-manifest">Locate the Index ID in the manifest</h2>
-<p>Inside the unzipped EPUB document, locate the <em>EPUB manifest</em>. This file, usually (but not exclusively) a .opf file, will list the contents and ordering of the EPUB document. Locate the index(es) in the list of <code>&lt;item&gt;</code> tags, and note the id attribute on that tag. That id must be added to the <code>initial/index_ids.py</code> dictionary. The structure is much like that on the <code>pattern_mapping</code> dictionary, so an EPUB with the filename <em>0123456789999.epub</em> and an index id of <em>ch09index.html</em> would require the following line to the index_ids dictionary:</p>
+<h2 id="locate-the-index-id-in-the-package-document">Locate the Index ID in the package document</h2>
+<p>Inside the unzipped EPUB document, locate the <em>EPUB package document</em>. This file, usually (but not exclusively) a .opf file, will list the contents and ordering of the EPUB document. Locate the index(es) in the list of <code>&lt;item&gt;</code> tags, and note the id attribute on that tag. That id must be added to the <code>initial/index_ids.py</code> dictionary. The structure is much like that on the <code>pattern_mapping</code> dictionary, so an EPUB with the filename <em>0123456789999.epub</em> and an index id of <em>ch09index.html</em> would require the following line to the index_ids dictionary:</p>
 <div class="codehilite"><pre><span></span>    <span class="s1">&#39;0123456789999&#39;</span><span class="p">:</span> <span class="s1">&#39;ch09index.html&#39;</span><span class="p">,</span>
 </pre></div>
 
