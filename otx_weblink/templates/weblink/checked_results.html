@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block main %}
+<h1>Errors detected in url.xml:</h1>
+<ol>
+{% for tname in tname_errors %}
+<li><p><a href="{% url 'tname-update' tname.slug %}">{{ tname.nstring }}</a> has been {{ tname.status|lower }}{% if tname.replace_by %} by <a href="{% url 'tname-update' tname.replace_by.slug %}">{{ tname.replace_by }}</a>{% elif tname.redirected_to %} to {% comment %}<a href="{% url 'tname.redirected_to.slug' %}">{% endcomment %}{{ tname.redirected_to }}</a>{% endif %}.</p>
+<p style="margin-left:20pt;"><span class="small">You can edit the topic name to cancel the source of the error{% if tname.replace_by or tname.redirected_to %}, or click <b>here</b> to anchor the web link to the active topic name{% endif %}.</span></p>
+</li>
+{% endfor %}
+</ol>
+{% endblock main %}

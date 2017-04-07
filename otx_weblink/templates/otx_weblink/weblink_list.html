@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}DEMO-WEBLINK{% endblock %}
+{% block main %}
+  <h2>This is weblink_list.html</h2>
+  <h1>DEMO</h1>
+
+  <div class="lg-4 md-4 sm-4 xs-4">
+    <p><a href="admin/">Admin</a></p>
+  </div>
+  <div class="lg-4 md-4 sm-4 xs-4">
+    <p><a href="admin/hit">Admin/Hit</a></p>
+  </div>
+  <h3>List of Sources</h3>
+
+<ol>
+  {% for object in object_list %}
+  <li><a target="_reference" href="{{ object.url }}">{{ object.content }}</a><br/>
+    {% for basket in object.baskets.all %}
+    <a class="topic_link" target="_editorial" href="localhost:9000/#/basket/{{ basket.id }}">{{ basket }}</a>
+    {% endfor %}
+  </li>
+  {% endfor %}
+</ol>
+{% endblock %}
