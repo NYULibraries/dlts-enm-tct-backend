@@ -423,6 +423,17 @@
   </li>
 
         
+          
+          
+  <li class="md-nav__item">
+    
+      <a href="../relations/" title="Relations" class="md-nav__link">
+        Relations
+      </a>
+    
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -609,7 +620,7 @@
 </tr>
 <tr>
 <td>Single Page</td>
-<td><a href="#single-page">/api/epub/location/DOCUMENT_ID/</a></td>
+<td><a href="#single-page">/api/epub/location/LOCATION_ID/</a></td>
 <td></td>
 </tr>
 <tr>
@@ -777,12 +788,28 @@
 <td>String</td>
 <td>ISBN number for the book. See <a href="../overview">the API Overview</a> for note about sourcing</td>
 </tr>
+<tr>
+<td>locations[...].id</td>
+<td>Integer</td>
+<td>Internal id and primary identifier for each page. <a href="../overview">Usual caveats</a> regarding IDs apply</td>
+</tr>
+<tr>
+<td>locations[...].localid</td>
+<td>String</td>
+<td>Human-readable representation of the page number</td>
+</tr>
+<tr>
+<td>locations[...].sequence_number</td>
+<td>Integer</td>
+<td>Number used for properly ordering pages in a book</td>
+</tr>
+<tr>
+<td>locations[...].content</td>
+<td>String</td>
+<td>Excerpt of the content from the page (roughly the first 100 characters)</td>
+</tr>
 </tbody>
 </table>
-<p>locations[...].id               | Integer | Internal id and primary identifier for each page. <a href="../overview">Usual caveats</a> regarding IDs apply
-locations[...].localid          | String  | Human-readable representation of the page number
-locations[...].sequence_number  | Integer | Number used for properly ordering pages in a book 
-locations[...].content          | String  | Excerpt of the content from the page (roughly the first 100 characters) </p>
 <hr />
 <h2 id="single-page">Single Page</h2>
 <p>Contents information on a single page, including the pages full textual content and all occurrences at that particular page.</p>
@@ -988,6 +1015,7 @@ locations[...].content          | String  | Excerpt of the content from the page
 <h2 id="example-response_3">Example Response</h2>
 <div class="codehilite"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;nyup1&quot;</span><span class="p">,</span>
         <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;NYUP as of Spring 2015&quot;</span><span class="p">,</span>
         <span class="nt">&quot;pagenumber_pre_strings&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -1061,6 +1089,11 @@ locations[...].content          | String  | Excerpt of the content from the page
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>id</td>
+<td>Integer</td>
+<td>Internal id and primary identifier of this indexpattern</td>
+</tr>
 <tr>
 <td>name</td>
 <td>String</td>
@@ -1215,13 +1248,13 @@ locations[...].content          | String  | Excerpt of the content from the page
           </a>
         
         
-          <a href="../../credits/" title="Acknowledgements" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../relations/" title="Relations" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Acknowledgements
+                Relations
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

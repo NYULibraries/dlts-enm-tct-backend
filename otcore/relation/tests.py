@@ -2,11 +2,15 @@ from django.test import TestCase
 
 from otcore.hit.models import Basket
 from otcore.relation.models import RelatedBasket
+from otcore.lex.models import Recognizer
 
 from .processing import global_containment, process_single_basket
 
 
 class ContainmentTests(TestCase):
+    def setUp(self):
+        Recognizer.objects.create(recognizer=r'[^\w\s-]', replacer='')
+
     def assertIsContained(self, source_basket, destination_basket):
         self.assertTrue(RelatedBasket.objects.filter(source=source_basket, destination=destination_basket).exists())
 
@@ -17,8 +21,8 @@ class ContainmentTests(TestCase):
         """
         Tests a simple case of containment, with a smaller hit
         """
-        basket1 = Basket.create_from_string("Crosby, Stills, and Nash")
 
+        basket1 = Basket.create_from_string("Crosby, Stills, and Nash")
         basket2 = Basket.create_from_string("Crosby, Stills, Nash, and Young")
 
         process_single_basket(basket1)

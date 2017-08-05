@@ -4,7 +4,7 @@ from otcore.relation.models import RelationType, RelatedBasket
 from otcore.relation.processing import single_hit_containment, reverse_containment
 from otcore.hit.models import Hit, Basket
 from otcore.topic.models import Tokengroup
-from otcore.settings import setting
+from otcore.settings import otcore_settings
 
 
 def write_multiple_tokens(filename):
@@ -68,7 +68,7 @@ def nyu_process_single_basket(basket, run_containment=True, run_multipletokens=T
 
     if run_multipletokens:
         hits = Hit.objects.all()
-        slug_sets = [(frozenset(hit.slug.split('-')), hit) for hit in hits if len(frozenset(hit.slug.split('-'))) >= setting('MULTIPLE_RELATIONS_COUNT')]
+        slug_sets = [(frozenset(hit.slug.split('-')), hit) for hit in hits if len(frozenset(hit.slug.split('-'))) >= otcore_settings.MULTIPLE_RELATIONS_COUNT]
 
 
         for hit in basket.topic_hits.all():
@@ -83,7 +83,7 @@ def nyu_global_multiple_tokens():
     rtypes = get_rtypes()
 
     hits = Hit.objects.all()
-    slug_sets = [(frozenset(hit.slug.split('-')), hit) for hit in hits if len(frozenset(hit.slug.split('-'))) >= setting('MULTIPLE_RELATIONS_COUNT')]
+    slug_sets = [(frozenset(hit.slug.split('-')), hit) for hit in hits if len(frozenset(hit.slug.split('-'))) >= otcore_settings.MULTIPLE_RELATIONS_COUNT]
 
     while len(slug_sets) > 1:
         nyu_single_set_multiple_tokens(slug_sets[0], slug_sets[1:], rtypes)
@@ -96,7 +96,7 @@ def nyu_single_set_multiple_tokens(slug_set, slug_sets, rtypes):
     a common main entry, the cuttoff for multiple relations is actually:
        number-of-slugs-in-main-entry + 1
     """
-    intersections = [s for s in slug_sets if len(s[0].intersection(slug_set[0])) >= setting('MULTIPLE_RELATIONS_COUNT')]
+    intersections = [s for s in slug_sets if len(s[0].intersection(slug_set[0])) >= otcore_settings.MULTIPLE_RELATIONS_COUNT]
 
     for hit_set in intersections:
         hit1 = slug_set[1]

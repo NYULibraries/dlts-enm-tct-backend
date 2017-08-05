@@ -70,8 +70,8 @@
     "xpath_see": "span",
     "xpath_seealso": "span",
     "pagenumber_pre_strings": "[\"id=\\\"pg_\"]",
-    "pagenumber_css_selector_pattern": "span[@id=\"pg_{}\"]",
-    "pagenumber_xpath_pattern": "#pg_{}",
+    "pagenumber_xpath_pattern": "span[@id=\"pg_{}\"]",
+    "pagenumber_css_selector_pattern": "#pg_{}",
     "pagenumber_tag_pattern": "<span epub:type=\"pagebreak\" id=\"pg_{0}\" title=\"{0}\">",
     "separator_between_entry_and_occurrences": ",",
     "xpath_occurrence_link": "a[@href and not(starts-with(@href, '#')) and not(starts-with(@href, 'http:'))]",
@@ -190,7 +190,7 @@
     "xpath_see": "span",
     "xpath_seealso": "span",
     "pagenumber_pre_strings": "[\"<a id=\\\"pg_\"]",
-    "pagenumber_css_selector_pattern": "#\"pg_{}\"",
+    "pagenumber_css_selector_pattern": "#pg_{}",
     "pagenumber_xpath_pattern": "a[@id=\"pg_{}\"]",
     "pagenumber_tag_pattern": "<a id=\"pg_{}\"/>",
     "separator_between_entry_and_occurrences": ",",
@@ -237,6 +237,36 @@
     "indicators_of_occurrence_range": "[\"–\", \"—\"]",
     "see_split_strings": "[\". See\"]",
     "see_also_split_strings": "[\". See also\", \". <i>See also</i>\", \", See also\"]"
+  }
+},
+{
+  "model": "manuscripts.indexpattern",
+  "pk": 9,
+  "fields": {
+    "name": "ump2",
+    "description": "University of Michigan Press as of July 2015 -- alt structure with primary class",
+    "xpath_entry": "p[@class=\"primary\"]",
+    "subentry_classes": "[]",
+    "xpath_see": "em",
+    "xpath_seealso": "em",
+    "pagenumber_pre_strings": "[\"<a id=\\\"page_\"]",
+    "pagenumber_css_selector_pattern": "#page_{}",
+    "pagenumber_xpath_pattern": "a[@id=\"page_{}\"]",
+    "pagenumber_tag_pattern": "<a id=\"page_{}\">",
+    "separator_between_entry_and_occurrences": ",",
+    "xpath_occurrence_link": "a[@href and not(starts-with(@href, '#')) and not(starts-with(@href, 'http:'))]",
+    "separator_before_first_subentry": ":",
+    "separator_between_subentries": ";",
+    "separator_between_sees": ";",
+    "separator_see_subentry": ",",
+    "separator_between_seealsos": ";",
+    "inline_see_start": "",
+    "inline_see_also_start": "",
+    "inline_see_end": "",
+    "inline_see_also_end": "",
+    "indicators_of_occurrence_range": "[\"–\", \"—\"]",
+    "see_split_strings": "[\". See\"]",
+    "see_also_split_strings": "[\". See also\", \", See also\"]"
   }
 }
 ]

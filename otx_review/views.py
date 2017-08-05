@@ -6,7 +6,7 @@ from django.utils import timezone
 from otcore.hit.views import HitSearchView, BasketSearchView
 from otcore.hit.models import Hit, Basket
 from .serializers import ReviewSerializer, HitListWithReviewSerializer, ReportSerializer, \
-    BasketListWithReviewSerializer, BasketListWithReviewAndCountsSerializer
+    BasketListWithReviewSerializer
 from .models import Review, Report
 from .reports import generate_csv_report
 
@@ -58,12 +58,6 @@ class ReviewBasketSearchView(BasketSearchView):
     """
     serializer_class = BasketListWithReviewSerializer
     queryset = Basket.objects.select_related('review', 'review__reviewer').all()
-
-    def get_serializer_class(self, *args, **kwargs):
-        if self.request.query_params.get('counts', False):
-            return BasketListWithReviewAndCountsSerializer
-        else:
-            return BasketListWithReviewSerializer
 
 
 class ReviewAllHitsView(generics.ListAPIView):

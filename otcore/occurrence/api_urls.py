@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^occurrence/new/$', views.OccurrenceNewView.as_view()),
     url(r'^occurrence/newWithHit/$', views.OccurrenceNewWithHitView.as_view()),
     url(r'^occurrence/newOnBasket/$', views.OccurrenceNewOnBasketView.as_view()),
+    url(r'^occurrence/newFromUISelect/$', views.OccurrenceFromUISelectView.as_view()),
 ]

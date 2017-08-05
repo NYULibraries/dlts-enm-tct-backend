@@ -492,7 +492,7 @@ class IndexExtractor(XMLExtractor):
             except StopIteration:
                 print("No location found at: {}".format(pg))
             else:
-                occurrence = Occurrence.objects.create(
+                occurrence, _ = Occurrence.objects.get_or_create(
                     location=location, basket=basket_to_attach
                 )
                 entry_occurrences.append(occurrence)

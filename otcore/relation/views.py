@@ -1,3 +1,4 @@
+import django_filters
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.db.models import Count
@@ -8,8 +9,8 @@ from rest_framework.views import APIView
 from otcore.topic.models import Tokengroup
 from .models import RelatedBasket, RelationType
 from .serializers import RelatedBasketSimpleSerializer, RelationTypeSerializer, \
-    RelatedBasketSerializer, RelationTypeWithCountsSerializer
-from .processing import global_containment, global_tokengroups, global_multiple_tokens
+    RelatedBasketSerializer, RelationTypeWithCountsSerializer, RelatedBasketListSerializer
+from .processing import global_containment, alt_global_multiple_tokens
 
 
 ##########################################
@@ -128,3 +129,26 @@ class ForbiddenRelationsByBasketView(APIView):
         destination_data = RelatedBasketSerializer(destinations, many=True, direction='source').data
 
         return Response(source_data + destination_data)
+
+
+class RunAutomaticRelationsView(APIView):
+    def post(self, request, *args, **kwargs):
+        global_containment()
+        alt_global_multiple_tokens()
+        
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class RelationFilter(django_filters.rest_framework.FilterSet):
+    rtype = django_filters.CharFilter(name='relationtype__rtype')
+
+    class Meta:
+        model = RelatedBasket
+        fields = ('rtype', )
+
+
+class RelatedBasketListView(generics.ListAPIView):
+    filter_class = RelationFilter
+    queryset = RelatedBasket.objects.all().select_related('source', 'destination', 'relationtype')
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend, )
+    serializer_class = RelatedBasketListSerializer

@@ -38,10 +38,10 @@ class XMLExtractor(BaseDocumentExtractor):
 
         self.tree = etree.fromstring(xml_string)
             
-    def extract_title(self):
+    def create_title(self):
         return self.tree.xpath(self.pattern.xpath_title)
 
-    def extract_author(self):
+    def create_author(self):
         return self.tree.xpath(self.pattern.xpath_author)
 
     def create_locations(self):

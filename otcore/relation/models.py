@@ -1,14 +1,12 @@
 from django.db import models
 
-from otcore.settings import setting
+from otcore.settings import otcore_settings
 
 
 class RelationType(models.Model):
-
     """
     rtype stands for: 'relation type'
     """
-
     rtype = models.CharField(max_length=100, unique=True, null=False, default='Generic')
     description = models.TextField(blank=True, null=True)
     role_from = models.CharField(max_length=100, default='Generic')
@@ -42,7 +40,6 @@ class RelatedBasketQuerySet(models.QuerySet):
 
 
 class RelatedBasket(models.Model):
-
     relationtype = models.ForeignKey(RelationType, default=get_default_type, on_delete=models.SET_DEFAULT, related_name='related_baskets')
     forbidden = models.BooleanField(default=False)
     source = models.ForeignKey('hit.Basket', related_name='from_relations', on_delete=models.CASCADE)
@@ -58,7 +55,7 @@ class RelatedBasket(models.Model):
         unique_together = (('relationtype', 'source', 'destination'))
 
     def check_delete(self, *args, **kwargs):
-        if self.relationtype.rtype in setting('AUTOMATIC_RELATIONTYPES'):
+        if self.relationtype.rtype in otcore_settings.AUTOMATIC_RELATIONTYPES:
             self.forbidden = True
             self.save()
         else:

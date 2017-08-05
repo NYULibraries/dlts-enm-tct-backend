@@ -9,6 +9,7 @@ from .serializers import DocumentListSerializer, DocumentDetailSerializer, \
         LocationFullSerializer, OccurrenceFromLocationSerializer, OccurrenceUpdateSerializer, \
         OccurrenceSerializer
 from .processing import create_occurrence_rings
+from otcore.hit.forms import add_or_create_from_uiselect
 from otcore.hit.models import Hit
 from otcore.lex.lex_utils import lex_slugify
 
@@ -161,6 +162,33 @@ class OccurrenceNewWithHitView(APIView):
         return Response(OccurrenceFromLocationSerializer(occurrence).data)
 
 
+class OccurrenceFromUISelectView(APIView):
+    """
+    Accepts data in the following form:
+    {
+        'location_id': LOCATION_ID,
+        'hit': {
+            'name': 'SOME_STRING'
+            'id': BASKET_ID
+        }
+    }
+    If `hit.id` is a positive integer, create an occurrence linking the basket and location.
+    If `hit.id` is -1, then create a hit with that name, create the requisite basket
+    and then create the matching occurrence
+    """
+    def post(self, request, *args, **kwargs):
+        hit = add_or_create_from_uiselect(Hit, 'name', request.data['hit'])
+        hit.create_basket_if_needed()
+
+        occurrence, _ = Occurrence.objects.get_or_create(
+            basket=hit.basket, location_id=request.data['location_id']
+        )
+
+        serializer = OccurrenceFromLocationSerializer(occurrence)
+
+        return Response(serializer.data)
+
+
 class OccurrenceNewOnBasketView(APIView):
     def post(self, request, *args, **kwargs):
         occurrence, _ = Occurrence.objects.get_or_create(
@@ -171,7 +199,7 @@ class OccurrenceNewOnBasketView(APIView):
         return Response(OccurrenceSerializer(occurrence).data)
 
 
-class BaseExtractorView(APIView):
+class BaseExtractorView(generics.GenericAPIView):
     """
     Base class for creating Extraction views
 
@@ -184,6 +212,7 @@ class BaseExtractorView(APIView):
 
     extractor_class = None
     data_source_key = 'source'
+    serializer_class = DocumentListSerializer
 
     def get_extractor_class(self, request):
         """
@@ -230,7 +259,9 @@ class BaseExtractorView(APIView):
         extractor = extractor_class(source)
         extractor.extract_all()
 
-        return Response(DocumentListSerializer(extractor.document).data)
+        serializer = self.get_serializer(extractor.document)
+
+        return Response(serializer.data)
 
 
 class BaseBulkExtractorView(BaseExtractorView):

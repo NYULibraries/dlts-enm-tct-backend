@@ -28,7 +28,6 @@ class HitNameField(serializers.Field):
 
 
 class HitSerializer(serializers.ModelSerializer):
-
     scope = ScopeSerializer()
 
     class Meta:
@@ -64,12 +63,22 @@ class BasketSimpleSerializer(serializers.ModelSerializer):
         fields = ('id', 'display_name')
 
 
-class BasketListWithCountsSerializer(serializers.ModelSerializer):
-    occurrence_counts = serializers.IntegerField()
+class BasketListSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        occurrence_counts = kwargs.pop('occurrence_counts', False)
+        relation_counts = kwargs.pop('relation_counts', False)
+
+        super(BasketListSerializer, self).__init__(*args, **kwargs)
+
+        if occurrence_counts:
+            self.fields['occurrence_counts'] = serializers.IntegerField()
+
+        if relation_counts:
+            self.fields['relation_counts'] = serializers.IntegerField()
 
     class Meta:
         model = Basket
-        fields = ('id', 'display_name', 'occurrence_counts')
+        fields = ('id', 'display_name', )
 
 
 class HitListWithBasketNamesSerializer(serializers.ModelSerializer):
@@ -87,4 +96,10 @@ class BasketSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Basket
-        fields = ('id', 'topic_hits', 'occurs', 'display_name')
+        fields = ('id', 'topic_hits', 'occurs', 'display_name', 'description')
+
+
+class BasketUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Basket
+        fields = ('id', 'display_name', 'description')

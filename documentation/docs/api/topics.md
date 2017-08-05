@@ -9,6 +9,8 @@ All Topics (with review data)       | [/api/review/baskets/all](#topics-with-rev
 Subset of Topics (with review data) | [/api/review/baskets/search](#reviewed-topics-subset)       | letter, document
 List of All Names                   | [/api/hit/hits/all/](#all-names)                            | 
 List of Subset of Names             | [/api/hit/hits/search/](#names-subset)                      | name, letter, scope, ttype
+List of All Scopes                  | [/api/hit/scope/all/](#all-scopes)                          | 
+List of All Topic Types             | [/api/topic/ttype/all/](#all-topic-types)                   | 
 
 !!! note "A Note on Terminology"
     You may notice the terms __basket__ and __hit__ a lot on this page.  Internally, this is how our topic mapping software refers to __topics__ and __names__, respectively.  In almost all cases, mentally replacing __basket__ with __topic__ and __hit__ with __name__ will work perfectly.
@@ -174,6 +176,28 @@ Gives all data for a single topic, including all names, occurrences, and relatio
                 }
             }
         ],
+        "weblinks": [
+            {
+                "id": 56,
+                "content": "Library of Congress (exactMatch)",
+                "url": "http://id.loc.gov/authorities/names/someFakeId"
+            },
+            {
+                "id": 112,
+                "content": "Wikidata (exactMatch)",
+                "url": "https://www.wikidata.org/entity/someFakeId"
+            },
+        ],
+        "types": [
+            {
+                "ttype": "skos:Concept",
+                "id": 6
+            },
+            {
+                "ttype": "schema:CreativeWork",
+                "id": 1
+            }
+        ]
         "display_name": "video -- \"games\""
     }
 }
@@ -200,6 +224,11 @@ basket.occurs[...].location.id              | Integer | Internal ID of that page
 basket.occurs[...].location.document.title  | String  | Title of the original source that this occurrence is in
 basket.occurs[...].location.document.author | String  | Author of the original source that this occurrence is in
 basket.occurs[...].location.localid         | String  | Identifier for this particular location (relative to the document).  This __is__ guaranteed to be stable across ingests
+basket.weblinks[...].id                     | Integer | Internal ID of the weblink
+basket.weblinks[...].content                | String  | Human-readable description of the weblink. Is often, but is not required to be, the title of the linked webpage
+basket.weblinks[...].url                    | String  | Full URL of the weblink. Must start with http or https
+basket.types[...].id                        | Integer | Internal ID of the Topic Type
+basket.types[...].ttype                     | String  | Human-readable name of the Topic Type
 relations                                   | List    | List/Description of all related topics
 relations[...].ids                          | Integer | Internal ID of this particular relation
 relations[...].basket.id                    | Integer | ID of the related topic
@@ -211,8 +240,7 @@ relations[...].relationtype.role_to         | String  | Description of the from 
 relations[...].relationtype.symmetrical     | Boolean | Indicates whether or not this RelationType is symmetrical.  Another way of saying that "role_to" and "role_form" (described above) are equivalent.
 relations[...].direction                    | String  | Describes whether the current topic is the "source" (e.g. uses the "role_to" description above) or the "destination" (e.g. uses the "role_from" description above) of the given relationship. Important for noting the directionality of non-symmetrical relationships
 
----
-
+--- 
 ## Topics With Review
 
 Similar to the [All Topics](#all-topics) API Endpoint, except that it also includes information on whether or not the topic has been reviewed (and by whom):
@@ -371,3 +399,81 @@ Where __SCOPE_ID__ is the internal id of the given scope.  It's also worth notin
 Would return all names that start with the letter A and contains the (case-insensitive) string "justice".
 
 For the structure of the response, see the [All Names](#all-names) API endpoint.
+
+---
+
+## All Scopes
+
+Gives a list of all scopes in the system:
+
+```
+/api/hit/scope/all/
+```
+
+### Example response
+
+```json
+[
+    {
+        "id": 2,
+        "scope": "Generic"
+    },
+    {
+        "id": 3,
+        "scope": "musical group"
+    },
+    ...
+    {
+        "id": 88,
+        "scope": "Internet"
+    }
+]
+```
+
+### Field Descriptions
+
+Field         | Type    | Description
+------------- | ------- | -----------
+id            | Integer | Internal id and primary identifier for each topic
+scope         | String  | Human-readable description of the scope
+
+---
+
+## All Topic Types
+
+Gives a list of all Topic Types in the system:
+
+```
+/api/topic/ttype/all/
+```
+
+### Example response
+
+```json
+[
+    {
+        "ttype": "schema:CreativeWork",
+        "id": 1
+    },
+    {
+        "ttype": "schema:Intangible",
+        "id": 2
+    },
+    ...
+    {
+        "ttype": "Native Americans",
+        "id": 21
+    },
+    {
+        "ttype": "pto:Pseudonym",
+        "id": 22
+    }
+]
+```
+
+### Field Descriptions
+
+Field         | Type    | Description
+------------- | ------- | -----------
+id            | Integer | Internal id and primary identifier for each topic
+ttype         | String  | Human-readable description of the Topic type

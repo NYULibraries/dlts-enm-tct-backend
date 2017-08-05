@@ -1,8 +1,8 @@
 import os
 from nyu.settings import *
 
-STATIC_ROOT = '/vagrant/static'
-MEDIA_ROOT = '/vagrant/media'
+STATIC_ROOT = '/vagrant/nyu/static'
+MEDIA_ROOT = '/vagrant/nyu/media'
 # Epub config settings
 EPUB_SOURCES_FOLDER = os.path.join(MEDIA_ROOT, 'epubs')
 EPUB_UPLOAD_FOLDER = EPUB_SOURCES_FOLDER

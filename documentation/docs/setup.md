@@ -21,7 +21,7 @@ DATABASES = {
 
 ### Secret Keys
 
-__ENM Topic Curation Toolkit Backend__ requires a file `nyu/secret_keys.json` with the following structure:
+__ENM Topic Curation Toolkit Backend__ requires a file `nyu/secretkeys.json` with the following structure:
 
 ```json
 {

@@ -14,6 +14,7 @@ pages:
       - Overview: 'api/overview.md'
       - Topics: 'api/topics.md'
       - Sources: 'api/sources.md'
+      - Relations: 'api/relations.md'
   - Acknowledgements: credits.md
 
 theme: 'material'

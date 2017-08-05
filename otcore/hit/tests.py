@@ -32,9 +32,7 @@ class HitModelTests(TestCase):
         ny = Hit(name="New York")
         ny.save()
 
-        # NOTE: we need to look at this.  This is WAY too many queries to make a basket
-        with self.assertNumQueries(13):
-            ny.create_basket_if_needed()
+        ny.create_basket_if_needed()
 
         self.assertEqual(Basket.objects.count(), 1)
 

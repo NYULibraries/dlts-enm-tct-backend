@@ -6,8 +6,8 @@ from rest_framework.response import Response
 
 from otcore.occurrence.models import Location, Document
 from otcore.occurrence.views import DocumentDetailView, LocationDetailView
-from otcore.hit.views import get_basket_data
 from otcore.hit.models import Basket
+from otcore.settings import otcore_settings
 from otx_epub.models import Epub
 
 from .serializers import EpubLocationFullSerializer, EpubDocumentSerializer, \
@@ -93,7 +93,8 @@ class AutomaticRelationView(APIView):
         nyu_process_single_basket(basket)
 
         add_types_to_relations = self.request.query_params.get('add_types', False)
-        data = get_basket_data(basket, add_types_to_relations=add_types_to_relations)
+        transformer = otcore_settings.BASKET_TRANSFORMER
+        data = transformer(basket, add_types_to_relations=add_types_to_relations).data
 
         return Response(data)
 

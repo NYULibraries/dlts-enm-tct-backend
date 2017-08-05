@@ -117,6 +117,7 @@ class IndexPatternSerializer(serializers.ModelSerializer):
     class Meta:
         model = IndexPattern
         fields = (
+            'id', 
             'name',
             'description',
             'pagenumber_pre_strings',

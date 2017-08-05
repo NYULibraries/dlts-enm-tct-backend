@@ -36,11 +36,9 @@ class Document(models.Model):
                 basket_to_delete_ids.append(basket.id)
 
         # Delete those baskets
-        print("{} Baskets deleted.".format(len(basket_to_delete_ids)))
         Basket.objects.filter(id__in=basket_to_delete_ids).delete()
 
         # Delete Associated Content
-        print("{} Content objects deleted".format(Content.objects.filter(at_location__document=self).count()))
         Content.objects.filter(at_location__document=self).delete()
 
         return super(Document, self).delete()

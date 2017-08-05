@@ -10,63 +10,16 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .forms import add_or_create_from_uiselect
-from otcore.hit.models import Hit, Basket, Scope
-from otcore.hit.serializers import HitSerializer, BasketSerializer, HitListSerializer, \
-    HitUpdateSerializer, HitListWithBasketNamesSerializer, HitCreateSerializer, \
-    ScopeSerializer, BasketSimpleSerializer, ScopeWithCountsSerializer, BasketSimpleSerializer, \
-    BasketListWithCountsSerializer
-from otcore.hit.processing import merge_baskets, detach
+from .models import Hit, Basket, Scope
+from .serializers import *
+from otcore.settings import otcore_settings
+from .processing import merge_baskets, detach
 from otcore.relation.models import RelatedBasket
 from otcore.relation.serializers import RelatedBasketSerializer
 from otcore.occurrence.models import Occurrence
 from otcore.lex.lex_utils import lex_slugify
 from otcore.topic.models import Ttype
 from otcore.topic.serializers import TtypeSerializer
-
-
-def get_basket_data(basket, add_types_to_relations=False):
-    # NOTE: distinct on individual fields is only possible in postgres
-
-    related_data = []
-    for direction in ['source', 'destination']:
-        this_basket = 'source' if direction == 'destination' else 'destination'
-
-        # user kwargs dictionary allows us to make dynamic filter calls, changing the filter query
-        # depending on whether we're dealing with the source or destination basket
-        filter_kwargs = { 'forbidden': False, this_basket: basket}
-        related_query = RelatedBasket.objects.filter(**filter_kwargs).select_related('relationtype', direction)
-
-        if add_types_to_relations:
-            related_query = related_query.prefetch_related('{}__types'.format(direction))
-
-        related_query = related_query.order_by('id').distinct('id')
-
-        # for r in related_query:
-        #    print("{} {} {} {}".format(direction, r.source.id, r.destination.id, r.id))
-
-        # pass direction query into serializer to get properly serializer relation
-        related_data_subset = RelatedBasketSerializer(
-                related_query,
-                many=True,
-                direction=direction,
-                add_basket_types=add_types_to_relations
-        ).data
-        related_data = related_data + related_data_subset
-
-    related_data.sort(key=lambda x: x['basket']['display_name'].lower())
-
-    basket_data = BasketSerializer(basket).data
-    basket_data['occurs'] = sorted(basket_data['occurs'], key=lambda x: (
-        x['location']['document']['author'],
-        x['location']['document']['title'],
-        x['location']['sequence_number']))
-
-    data = {
-        "basket": basket_data,
-        "relations": related_data,
-    }
-
-    return data
 
 
 ##########################################
@@ -115,7 +68,6 @@ class HitFilter(django_filters.rest_framework.FilterSet):
 
 
 class HitSearchView(generics.ListAPIView):
-
     serializer_class = HitListSerializer
     # authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny,)
@@ -175,6 +127,8 @@ class HitChangeView(APIView):
         # Otherwise, call normal save
         if (not hit.preferred and request.data['preferred']) or (name_changed and hit.preferred):
             hit.make_preferred(force=True, save=False)
+        elif hit.preferred != request.data['preferred']:
+            hit.preferred = request.data['preferred']
 
         hit.save()
         hit.basket.save() # basket save forces display name to recalculate display_name
@@ -194,7 +148,9 @@ class HitUnhideView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-class BasketDetailView(APIView):
+class BasketDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Basket.objects.all()
+    serializer_class = BasketUpdateSerializer
 
     def get(self, request, *args, **kwargs):
         basket_query = Basket.objects.filter(id=self.kwargs['pk']).prefetch_related(
@@ -203,7 +159,7 @@ class BasketDetailView(APIView):
             'occurs',
             'occurs__location',
             'occurs__location__document',
-            )
+        )
 
         try:
             basket = basket_query[0]
@@ -211,19 +167,11 @@ class BasketDetailView(APIView):
             return Response({"Error": "No Basket Matches that ID"})
 
         add_types_to_relations = self.request.query_params.get('add_types', False)
-        data = get_basket_data(basket, add_types_to_relations=add_types_to_relations)
+
+        transformer = otcore_settings.BASKET_TRANSFORMER
+        data = transformer(basket, add_types_to_relations=add_types_to_relations).data
 
         return Response(data)
-
-    def delete(self, request, *args, **kwargs):
-        try:
-            basket = Basket.objects.get(id=self.kwargs['pk'])
-        except Basket.DoesNotExist:
-            return Response({"Error": "No Basket Matches that ID"})
-
-        basket.delete()
-
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class BasketMergeView(APIView):
@@ -240,7 +188,8 @@ class BasketMergeView(APIView):
 
         merged_basket = merge_baskets(basket_discarded, basket_remaining)
 
-        data = get_basket_data(merged_basket)
+        transformer = otcore_settings.BASKET_TRANSFORMER
+        data = transformer(merged_basket).data
 
         return Response(data)
 
@@ -274,7 +223,8 @@ class BasketListView(generics.ListAPIView):
 
 class BasketFilter(django_filters.rest_framework.FilterSet):
     letter = django_filters.CharFilter(method='filter_letter')
-    counts = django_filters.CharFilter(method='filter_counts')
+    occurrence_counts = django_filters.CharFilter(method='filter_occurrence_counts')
+    relation_counts = django_filters.CharFilter(method='filter_relation_counts')
     document = django_filters.NumberFilter('occurs__location__document_id')
 
     def filter_letter(self, queryset, name, value):
@@ -285,9 +235,14 @@ class BasketFilter(django_filters.rest_framework.FilterSet):
 
         return queryset
 
-    def filter_counts(self, queryset, name, value):
+    def filter_occurrence_counts(self, queryset, name, value):
         if value:
-            queryset = queryset.annotate(occurrence_counts=Count('occurs'))
+            queryset = queryset.annotate(occurrence_counts=Count('occurs', distinct=True))
+        return queryset
+
+    def filter_relation_counts(self, queryset, name, value):
+        if value:
+            queryset = queryset.annotate(relation_counts=Count('to_relations', distinct=True)+Count('from_relations', distinct=True))
 
         return queryset
 
@@ -297,16 +252,20 @@ class BasketFilter(django_filters.rest_framework.FilterSet):
 
 
 class BasketSearchView(generics.ListAPIView):
-    serializer_class = BasketSimpleSerializer
+    serializer_class = BasketListSerializer
     queryset = Basket.objects.all()
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     filter_class = BasketFilter
 
-    def get_serializer_class(self, *args, **kwargs):
-        if self.request.query_params.get('counts', False):
-            return BasketListWithCountsSerializer
-        else:
-            return BasketSimpleSerializer
+    def get_serializer(self, *args, **kwargs):
+        """
+        Passes addition 'relation_counts' and 'occurrence_counts' params to serializer
+        """
+        serializer_class = self.get_serializer_class()
+        kwargs['context'] = self.get_serializer_context()
+        kwargs['occurrence_counts'] = self.request.query_params.get('occurrence_counts', False)
+        kwargs['relation_counts'] = self.request.query_params.get('relation_counts', False)
+        return serializer_class(*args, **kwargs)
 
 
 class AddHit_Main(APIView):
@@ -461,7 +420,8 @@ class DetachView(APIView):
 
         corrected_old_basket, _ = detach(hit, old_basket, request.data['split_data'])
 
-        data = get_basket_data(corrected_old_basket)
+        transformer = otcore_settings.BASKET_TRANSFORMER
+        data = transformer(corrected_old_basket).data
 
         return Response(data)
 

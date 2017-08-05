@@ -4,7 +4,7 @@ Description                         | Endpoint                                  
 ----------------------------------  | ---------------------------------------------------------   | ----------------
 List of All EPUBs                   | [/api/epub/document/all/](#all-epubs)                       |
 EPUB Detail                         | [/api/epub/document/DOCUMENT_ID/](#epub-detail)             | withOccurrences
-Single Page                         | [/api/epub/location/DOCUMENT_ID/](#single-page)             |
+Single Page                         | [/api/epub/location/LOCATION_ID/](#single-page)             |
 List of All Indexpatterns           | [/api/epub/index-pattern/all/](#all-indexpatterns)          |
 
 ---
@@ -122,7 +122,6 @@ title                           | String  | Title of the EPUB
 author                          | String  | Author of the EPUB 
 epub                            | String  | Publisher of the EPUB. See [All EPUBs](#all-epubs) for note about consistency.
 isbn                            | String  | ISBN number for the book. See [the API Overview](overview) for note about sourcing
-
 locations[...].id               | Integer | Internal id and primary identifier for each page. [Usual caveats](overview) regarding IDs apply
 locations[...].localid          | String  | Human-readable representation of the page number
 locations[...].sequence_number  | Integer | Number used for properly ordering pages in a book 
@@ -243,6 +242,7 @@ A list of all IndexPattern objects. Indexpatterns are primarily used for extract
 ```json
 [
     {
+        "id": 5,
         "name": "nyup1",
         "description": "NYUP as of Spring 2015",
         "pagenumber_pre_strings": [
@@ -309,6 +309,7 @@ A list of all IndexPattern objects. Indexpatterns are primarily used for extract
 
 Field                                   | Type           | Description
 --------------------------------------- | -------------- | -----------
+id                                      | Integer        | Internal id and primary identifier of this indexpattern
 name                                    | String         | Unique string representation of indexpattern. Primary means of fetching a pattern from the database
 description                             | String         | Longer, human-readable text description of the IndexPattern. __Note:__ Descriptions are _not_ guaranteed to be unique by the database, and are merely meant to contain supplemental information.
 pagenumber_pre_strings                  | Array (String) | When locating page numbers, this is a list of patterns to look for and split the text on. After this processing is done, the result should be a list of strings with the page number at the beginning of the string, followed by the content of the page. Used for extracting both locations and content from an EPUB

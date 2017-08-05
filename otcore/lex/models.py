@@ -1,91 +1,56 @@
 from django.db import models
-from django.core.urlresolvers import reverse
-import importlib
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.cache import cache
+
+from otcore.settings import otcore_settings
 
 
 class StopWord(models.Model):
-
     """
     Stop words will be discarded and will not be transformed into tokens.
     """
-
-    word = models.CharField(max_length=500, unique=True, db_index=True)
-
-    def __str__(self):
-        return self.word
-
-    def get_absolute_url(self):
-        return reverse('alt-stopword-update', args=[self.id])
-
-    class Meta:
-        ordering = ('word',)
-
-
-class Acronym(models.Model):
-
-    """
-    This is a translation table between acronyms and their developed forms.
-    Acronyms are expanded for merging purposes, when present into a string.
-    Some acronyms (e.g. "AS" for "American Samoa") may be in conflict with
-    "as" if "as" is declared as a stop word.
-    """
-
-    acronym = models.CharField(max_length=20, unique=True)
-    developed = models.CharField(max_length=500, blank=False)
-    active = models.BooleanField(default=True)
-    rationale = models.CharField(max_length=500, blank=True, null=True)
-
-    def __str__(self):
-        return self.acronym
-
-    def get_absolute_url(self):
-        return reverse('alt-acronym-update', args=[self.id])
-
-    class Meta:
-        ordering = ('acronym', )
-
-
-class Expression(models.Model):
-
-    """
-    Expressions are sequences of words that need to be kept together,
-    because they lose their meaning in isolation. For example, "United States"
-    or "Real Estate". If they would not be declared as exception, "Real Estate" for
-    example would be tokenized into two tokens, "real" and "estate", therefore
-    opening the door to merging with other topic names that would contain "estate",
-    and that wouldn't make sense.
-    """
-
-    expression = models.CharField(max_length=500, unique=True, db_index=True)
-
-    def __str__(self):
-        return self.expression
-
-    def get_absolute_url(self):
-        return reverse('alt-expression-update', args=[self.id])
-
-    class Meta:
-        ordering = ('expression',)
-
-
-class Irregular(models.Model):
-
-    """
-    List of words, manually transformed into tokens.
-    This list includes irregular plural, as well as any word
-    that needs to be transformed into a token.
-    """
-
-    word = models.CharField(max_length=255, unique=True, db_index=True)
-    token = models.CharField(max_length=255)
-
-    @property
-    def slug(self):
-        return self.token
+    word = models.SlugField(max_length=50, unique=True, db_index=True, allow_unicode=True)
 
     def __str__(self):
         return self.word
 
     class Meta:
         ordering = ('word',)
-        unique_together = (('word', 'token'))
+
+
+@receiver(post_save, sender=StopWord, dispatch_uid='recache_stopwords')
+def recache_stopwords(*args, **kwargs):
+    if otcore_settings.CACHE_STOPWORDS:
+        stopwords = StopWord.objects.values_list('word', flat=True) 
+        cache.set('stopwords', stopwords)
+
+        return stopwords
+
+
+class Recognizer(models.Model):
+    """
+    regex-based match and replace
+    """
+    description = models.CharField(max_length=256, blank=True)
+
+    recognizer = models.CharField(max_length=100)
+    replacer = models.SlugField(max_length=100, allow_unicode=True)
+
+    priority = models.FloatField(default=1.0)
+    passthrough = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('priority', )
+
+    def __str__(self):
+        return '{} | {}'.format(self.recognizer, self.replacer)
+
+
+@receiver(post_save, sender=Recognizer, dispatch_uid='recache_recognizers')
+def recache_recognizers(*args, **kwargs):
+    if otcore_settings.CACHE_RECOGNIZERS:
+        recognizers = list(Recognizer.objects.all())
+        cache.set('recognizers', recognizers)
+
+        return recognizers

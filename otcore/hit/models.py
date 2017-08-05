@@ -10,7 +10,7 @@ from otcore.lex.lex_utils import lex_slugify
 from otcore.topic.models import Tokengroup
 from otcore.relation.models import RelatedBasket
 from otcore.management.common import substring_before
-from otcore.settings import setting
+from otcore.settings import otcore_settings
 
 
 def pop_from(instance):
@@ -21,12 +21,12 @@ def pop_from(instance):
 
 
 class Scope(models.Model):
-
     """
-    Scope is the way to disambiguate between names using the same string. For example: New York (scope:City) and New York (scope:State).
+    Scope is the way to disambiguate between names using the same string. 
+    For example: New York (scope:City) and New York (scope:State).
     """
-
-    scope = models.CharField(max_length=100, null=False, unique=True, default='Generic', db_index=True)
+    scope = models.CharField(max_length=100, null=False, unique=True, 
+                             default='Generic', db_index=True)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -37,16 +37,15 @@ class Scope(models.Model):
 
 
 class Basket(models.Model):
-
     """
     A basket is a container that groups the various hits being used as a topic name.
     The label of a basket is identical to the topic identifier.
     """
-
     label = models.CharField(max_length=512, db_index=True)
     types = models.ManyToManyField('topic.Ttype', blank=True, related_name="baskets")
     tokengroups = models.ManyToManyField('topic.Tokengroup', blank=True)
     display_name = models.CharField(max_length=512, blank=True)
+    description = models.TextField(blank=True)
 
     # Remove categories because a topic can have mulltiple types, and then it's a matter of querying on intersection of types.
 
@@ -69,21 +68,13 @@ class Basket(models.Model):
         tokens = alltokens.split('-')
 
         # Only make token groups if there are more then a certain number of words in the name.
-        if len(tokens) >= setting('MULTIPLE_RELATIONS_COUNT'):
-            tokengroups = ['-'.join(sorted(list(x))) for x in itertools.combinations(tokens, setting('MULTIPLE_RELATIONS_COUNT'))]
+        if len(tokens) >= otcore_settings.MULTIPLE_RELATIONS_COUNT:
+            tokengroups = ['-'.join(sorted(list(x))) for x in itertools.combinations(tokens, otcore_settings.MULTIPLE_RELATIONS_COUNT)]
             tokengroup_objects = []
             for tokengroup in tokengroups:
                 tokengroup_objects.append(Tokengroup.objects.get_or_create(group=tokengroup)[0])
 
             self.tokengroups.add(*tokengroup_objects)
-
-    @property
-    def relative_topic_screen(self):
-        """
-        The topic screen address is the filename in the output topic screen
-        made of the slug followed by the scope id of the preferred topic name.
-        """
-        return '{}.{}'.format(self.label, settings.HTML_EXTENSION)
 
     @property
     def related_baskets(self):
@@ -225,7 +216,7 @@ class Hit(models.Model):
         # If the basket already exists, don't do anything
         # Otherwise, create a new basket.
         if not self.basket:
-            label = '%s%s%s' % (self.slug, setting('SCOPE_SEPARATOR'), self.scope.id)
+            label = '%s%s%s' % (self.slug, otcore_settings.SCOPE_SEPARATOR, self.scope.id)
 
             basket = Basket.objects.create(label=label)
             self.basket = basket

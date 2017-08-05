@@ -2,7 +2,7 @@ from django.db.models import Q, Count
 from otcore.hit.models import Hit, Basket
 from otcore.relation.models import RelationType, RelatedBasket
 from otcore.topic.models import Tokengroup
-from otcore.settings import setting
+from otcore.settings import otcore_settings
 
 
 
@@ -182,7 +182,7 @@ def alt_global_multiple_tokens():
     rtypes = get_rtypes()
 
     hits = Hit.objects.all()
-    slug_sets = [(frozenset(hit.slug.split('-')), hit) for hit in hits if len(frozenset(hit.slug.split('-'))) >= setting('MULTIPLE_RELATIONS_COUNT')]
+    slug_sets = [(frozenset(hit.slug.split('-')), hit) for hit in hits if len(frozenset(hit.slug.split('-'))) >= otcore_settings.MULTIPLE_RELATIONS_COUNT]
 
     counter=0
     total=len(slug_sets)
@@ -198,7 +198,7 @@ def alt_single_set_multiple_tokens(slug_set, slug_sets, rtypes):
     """
     Check for multiple token relations on a single hit/slug_set pair
     """
-    intersections = [s for s in slug_sets if len(s[0].intersection(slug_set[0])) >= setting('MULTIPLE_RELATIONS_COUNT')]
+    intersections = [s for s in slug_sets if len(s[0].intersection(slug_set[0])) >= otcore_settings.MULTIPLE_RELATIONS_COUNT]
 
     for hit_set in intersections:
         hit1 = slug_set[1]

@@ -1,13 +1,10 @@
-from unittest import mock
 import os
 
 from django.test import TestCase
 from django.utils import timezone
-from django.core.exceptions import ValidationError
 
 from ..extractors import BaseDocumentExtractor
 from ..models import Content, Location, Document
-from ..loaders import FileLoader
 from otcore.hit.models import Hit, Basket
 
 

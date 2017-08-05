@@ -426,6 +426,60 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#all-scopes" title="All Scopes" class="md-nav__link">
+    All Scopes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-response_4" title="Example response" class="md-nav__link">
+    Example response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-descriptions_4" title="Field Descriptions" class="md-nav__link">
+    Field Descriptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#all-topic-types" title="All Topic Types" class="md-nav__link">
+    All Topic Types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-response_5" title="Example response" class="md-nav__link">
+    Example response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-descriptions_5" title="Field Descriptions" class="md-nav__link">
+    Field Descriptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -439,6 +493,17 @@
     
       <a href="../sources/" title="Sources" class="md-nav__link">
         Sources
+      </a>
+    
+  </li>
+
+        
+          
+          
+  <li class="md-nav__item">
+    
+      <a href="../relations/" title="Relations" class="md-nav__link">
+        Relations
       </a>
     
   </li>
@@ -614,6 +679,60 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#all-scopes" title="All Scopes" class="md-nav__link">
+    All Scopes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-response_4" title="Example response" class="md-nav__link">
+    Example response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-descriptions_4" title="Field Descriptions" class="md-nav__link">
+    Field Descriptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#all-topic-types" title="All Topic Types" class="md-nav__link">
+    All Topic Types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-response_5" title="Example response" class="md-nav__link">
+    Example response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-descriptions_5" title="Field Descriptions" class="md-nav__link">
+    Field Descriptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -673,6 +792,16 @@
 <td>List of Subset of Names</td>
 <td><a href="#names-subset">/api/hit/hits/search/</a></td>
 <td>name, letter, scope, ttype</td>
+</tr>
+<tr>
+<td>List of All Scopes</td>
+<td><a href="#all-scopes">/api/hit/scope/all/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>List of All Topic Types</td>
+<td><a href="#all-topic-types">/api/topic/ttype/all/</a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -841,7 +970,29 @@
                 <span class="p">}</span>
             <span class="p">}</span>
         <span class="p">],</span>
-        <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;video -- \&quot;games\&quot;&quot;</span>
+        <span class="nt">&quot;weblinks&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">56</span><span class="p">,</span>
+                <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Library of Congress (exactMatch)&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://id.loc.gov/authorities/names/someFakeId&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">112</span><span class="p">,</span>
+                <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Wikidata (exactMatch)&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.wikidata.org/entity/someFakeId&quot;</span>
+            <span class="p">},</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;types&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;ttype&quot;</span><span class="p">:</span> <span class="s2">&quot;skos:Concept&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;ttype&quot;</span><span class="p">:</span> <span class="s2">&quot;schema:CreativeWork&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;video -- \&quot;games\&quot;&quot;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -941,6 +1092,31 @@
 <td>basket.occurs[...].location.localid</td>
 <td>String</td>
 <td>Identifier for this particular location (relative to the document).  This <strong>is</strong> guaranteed to be stable across ingests</td>
+</tr>
+<tr>
+<td>basket.weblinks[...].id</td>
+<td>Integer</td>
+<td>Internal ID of the weblink</td>
+</tr>
+<tr>
+<td>basket.weblinks[...].content</td>
+<td>String</td>
+<td>Human-readable description of the weblink. Is often, but is not required to be, the title of the linked webpage</td>
+</tr>
+<tr>
+<td>basket.weblinks[...].url</td>
+<td>String</td>
+<td>Full URL of the weblink. Must start with http or https</td>
+</tr>
+<tr>
+<td>basket.types[...].id</td>
+<td>Integer</td>
+<td>Internal ID of the Topic Type</td>
+</tr>
+<tr>
+<td>basket.types[...].ttype</td>
+<td>String</td>
+<td>Human-readable name of the Topic Type</td>
 </tr>
 <tr>
 <td>relations</td>
@@ -1197,6 +1373,106 @@
 
 <p>Would return all names that start with the letter A and contains the (case-insensitive) string "justice".</p>
 <p>For the structure of the response, see the <a href="#all-names">All Names</a> API endpoint.</p>
+<hr />
+<h2 id="all-scopes">All Scopes</h2>
+<p>Gives a list of all scopes in the system:</p>
+<div class="codehilite"><pre><span></span>/api/hit/scope/all/
+</pre></div>
+
+
+<h3 id="example-response_4">Example response</h3>
+<div class="codehilite"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;Generic&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;musical group&quot;</span>
+    <span class="p">},</span>
+    <span class="err">...</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
+        <span class="nt">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;Internet&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+
+
+<h3 id="field-descriptions_4">Field Descriptions</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>Integer</td>
+<td>Internal id and primary identifier for each topic</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>String</td>
+<td>Human-readable description of the scope</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="all-topic-types">All Topic Types</h2>
+<p>Gives a list of all Topic Types in the system:</p>
+<div class="codehilite"><pre><span></span>/api/topic/ttype/all/
+</pre></div>
+
+
+<h3 id="example-response_5">Example response</h3>
+<div class="codehilite"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;ttype&quot;</span><span class="p">:</span> <span class="s2">&quot;schema:CreativeWork&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;ttype&quot;</span><span class="p">:</span> <span class="s2">&quot;schema:Intangible&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="p">},</span>
+    <span class="err">...</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;ttype&quot;</span><span class="p">:</span> <span class="s2">&quot;Native Americans&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">21</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;ttype&quot;</span><span class="p">:</span> <span class="s2">&quot;pto:Pseudonym&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">22</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+
+
+<h3 id="field-descriptions_5">Field Descriptions</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>Integer</td>
+<td>Internal id and primary identifier for each topic</td>
+</tr>
+<tr>
+<td>ttype</td>
+<td>String</td>
+<td>Human-readable description of the Topic type</td>
+</tr>
+</tbody>
+</table>
               
             </article>
           </div>

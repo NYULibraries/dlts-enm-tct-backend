@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'manuscripts',
     'reconciliation',
+    'common',
     'otx_xml',
     'otx_epub',
     'otx_review',
@@ -106,14 +107,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 # FIXTURE_DIRS = BASE_DIR + '/initial/json'
-
-# Open Topic settings'
-INITIAL_FILE_ACRONYMS = 'initial.acronyms'
-INDEX_ID_FILE = 'initial.index_ids'
-INITIAL_FILE_STOPWORDS = BASE_DIR + '/initial/stopwords.txt'
-INITIAL_FILE_EXPRESSIONS = BASE_DIR + '/initial/expressions.txt'
-INITIAL_FILE_IRREGULARS = BASE_DIR + '/initial/irregulars.txt'
-
 RELATIONTYPE_SEE = 'See'
 RELATIONTYPE_SEEALSO = 'See Also'
 
@@ -176,3 +169,9 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'access-control-allow-credentials'
 )
+
+OTCORE = {
+    'INITIAL_FILE_STOPWORDS': os.path.join(BASE_DIR, 'initial', 'stopwords.txt'),
+    'INITIAL_FILE_RECOGNIZERS': 'initial.recognizers',
+    'BASKET_TRANSFORMER': 'common.transformers.NYUBasketTransformer',
+}

@@ -55,7 +55,7 @@ class XMLExtractorTests(TestCase):
         self.assertEqual(location.localid, '1')
         self.assertEqual(location.content.content_descriptor, "Joseph Cornell")
         self.assertEqual(location.content.text, 'Surrealist sculptor and collagist.  Fantastic diarama artist')
-        self.assertEqual(location.inputs.count(), 4)
+        self.assertEqual(location.occurrences.count(), 4)
 
     def test_alternate_pattern_name(self):
         """

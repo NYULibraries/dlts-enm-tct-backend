@@ -11,7 +11,7 @@ from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from otcore.hit.models import Hit, Basket, Scope
 from otcore.hit.admin import HitAdmin, BasketAdmin, ScopeAdmin
 
-from otcore.lex.models import StopWord, Acronym, Expression, Irregular
+from otcore.lex.models import StopWord
 from otcore.lex.admin import StopWordAdmin, AcronymAdmin, ExpressionAdmin, IrregularAdmin
 
 from otcore.occurrence.models import Location, Document, Occurrence, Content
@@ -37,9 +37,6 @@ nyu_admin.register(Hit, HitAdmin)
 nyu_admin.register(Basket, BasketAdmin)
 nyu_admin.register(Scope, ScopeAdmin)
 nyu_admin.register(StopWord, StopWordAdmin)
-nyu_admin.register(Acronym, AcronymAdmin)
-nyu_admin.register(Expression, ExpressionAdmin)
-nyu_admin.register(Irregular, IrregularAdmin)
 nyu_admin.register(Location, LocationAdmin)
 nyu_admin.register(Document, DocumentAdmin)
 nyu_admin.register(Occurrence, OccurrenceAdmin)

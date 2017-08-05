@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from otcore.relation.models import RelationType, RelatedHit, RelatedBasket
+from otcore.hit.serializers import BasketSimpleSerializer
 
 
 class RelationTypeSerializer(serializers.ModelSerializer):
@@ -37,10 +38,8 @@ class NewRelatedBasketSerializer(serializers.ModelSerializer):
 
 
 class RelatedBasketSerializer(serializers.ModelSerializer):
-
     """
     Relations with Hit, Basket model.
-
     """
     def __init__(self, *args, **kwargs):
         self.direction = kwargs.pop('direction', None)
@@ -77,3 +76,13 @@ class RelatedBasketSerializer(serializers.ModelSerializer):
     class Meta:
         model = RelatedBasket
         fields = ('id', 'relationtype', 'basket', 'direction')
+
+
+class RelatedBasketListSerializer(serializers.ModelSerializer):
+    relationtype = RelationTypeSerializer()
+    source = BasketSimpleSerializer()
+    destination = BasketSimpleSerializer()
+
+    class Meta:
+        model = RelatedBasket
+        fields = ('id', 'relationtype', 'source', 'destination', )

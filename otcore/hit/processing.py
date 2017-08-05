@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.db.models import Q
 from django.db.utils import IntegrityError
-from otcore.hit.models import Hit
+
+from .models import Hit
+from .serializers import BasketSerializer
 from otcore.relation.models import RelatedHit, RelatedBasket
+from otcore.relation.serializers import RelatedBasketSerializer
 from otcore.occurrence.models import Occurrence
-from otcore.settings import setting
+from otcore.settings import otcore_settings
 
 
 def detach(hit, old_basket, split_data):
@@ -30,7 +33,7 @@ def detach(hit, old_basket, split_data):
 
     # rename label to avoid potential labelling conflicts
     some_hit = old_basket.topic_hits.all()[0]
-    new_label = '%s%s%s' % (some_hit.slug, setting('SCOPE_SEPARATOR'), some_hit.scope.id)
+    new_label = '%s%s%s' % (some_hit.slug, otcore_settings.SCOPE_SEPARATOR, some_hit.scope.id)
     if new_label != old_basket.label:
         old_basket.label = new_label
         old_basket.save()
@@ -197,3 +200,64 @@ def merge_baskets(basket_discarded, basket_remaining):
     basket_discarded.delete()
 
     return basket_remaining
+
+
+class BasketTransformer:
+    """
+    One-way data transformer that creates data for basket_detail pages. Broken into pieces
+    so that the data provided can be easily overriden for different contexts
+    """
+    basket_serializer = BasketSerializer
+    relation_serializer = RelatedBasketSerializer
+
+    def __init__(self, basket, **kwargs):
+        self.add_types_to_relations = kwargs.get('add_types_to_relations', False)
+        self.basket = basket
+
+    @property
+    def data(self):
+        _data = {
+            'basket': self.get_basket_data(),
+            'relations': self.get_relation_data()
+        }
+
+        return _data
+
+    def get_basket_data(self):
+        basket_data = self.basket_serializer(self.basket).data
+        basket_data['occurs'] = self.sort_occurrences(basket_data['occurs'])
+        return basket_data
+
+    def sort_occurrences(self, occurrences):
+        return sorted(occurrences, key=lambda x: (
+            x['location']['document']['author'],
+            x['location']['document']['title'],
+            x['location']['sequence_number']))
+
+    def get_relation_data(self):
+        related_data = []
+        for direction in ['source', 'destination']:
+            this_basket = 'source' if direction == 'destination' else 'destination'
+
+            # user kwargs dictionary allows us to make dynamic filter calls, changing the filter query
+            # depending on whether we're dealing with the source or destination basket
+            filter_kwargs = { 'forbidden': False, this_basket: self.basket}
+            related_query = RelatedBasket.objects.filter(**filter_kwargs).select_related('relationtype', direction)
+
+            if self.add_types_to_relations:
+                related_query = related_query.prefetch_related('{}__types'.format(direction))
+
+            related_query = related_query.order_by('id').distinct('id')
+
+            # pass direction query into serializer to get properly serializer relation
+            related_data_subset = RelatedBasketSerializer(
+                    related_query,
+                    many=True,
+                    direction=direction,
+                    add_basket_types=self.add_types_to_relations
+            ).data
+            related_data = related_data + related_data_subset
+
+        related_data.sort(key=lambda x: x['basket']['display_name'].lower())
+    
+        return related_data

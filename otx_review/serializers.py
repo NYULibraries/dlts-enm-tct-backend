@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from otcore.hit.models import Hit, Basket
+from otcore.hit.serializers import BasketListSerializer
 from .models import Review, Report
 
 
@@ -33,21 +34,12 @@ class HitListWithReviewSerializer(serializers.ModelSerializer):
         fields = ('name', 'basket', 'scope', 'preferred', 'hidden', 'id', 'review')
 
 
-class BasketListWithReviewSerializer(serializers.ModelSerializer):
+class BasketListWithReviewSerializer(BasketListSerializer):
     review = ReviewSerializer()
 
     class Meta:
         model = Basket
         fields = ('id', 'display_name', 'review')
-
-
-class BasketListWithReviewAndCountsSerializer(serializers.ModelSerializer):
-    review = ReviewSerializer()
-    occurrence_counts = serializers.IntegerField()
-
-    class Meta:
-        model = Basket
-        fields = ('id', 'display_name', 'review', 'occurrence_counts')
         
 
 # With thanks to: 

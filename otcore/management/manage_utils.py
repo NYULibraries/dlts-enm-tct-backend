@@ -6,8 +6,8 @@ from otcore.occurrence.models import Occurrence, Document, Location, Content
 from otcore.relation.models import RelationType, RelatedHit, RelatedBasket
 from otcore.topic.models import Tokengroup
 from otcore.hit.models import Hit, Basket, Scope
+from otcore.lex.processing import read_stopwords, read_recognizers
 
-from otcore.lex.processing import read_stopwords
 
 
 def initialize():
@@ -20,28 +20,14 @@ def initialize():
 
     # Deleting Existing Data if any.
     print('Deleting existing data')
-    for x in RelatedHit.objects.all():
-        x.delete()
-    for x in RelatedBasket.objects.all():
-        x.delete()
-    for x in RelationType.objects.all():
-        x.delete()
-    for x in Basket.objects.all().order_by('id').distinct('id'):
-        x.delete()
-    for x in Hit.objects.all():
-        x.delete()
-    for x in Scope.objects.all():
-        x.delete()
-    for x in Occurrence.objects.all():
-        x.delete()
-    for x in RelationType.objects.all():
-        x.delete()
+    erase_data()
 
     print('(re)creating initial data')
     Scope.objects.get_or_create(scope="Generic", id=0)
     RelationType.objects.get_or_create(rtype='Generic', role_from='Generic', role_to='Generic', id=0)
 
     read_stopwords()
+    read_recognizers()
 
     # Create an empty basket.
     Basket.objects.get_or_create(label="")
