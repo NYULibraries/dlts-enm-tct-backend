@@ -31,6 +31,18 @@ __ENM Topic Curation Toolkit Backend__ requires a file `nyu/secretkeys.json` wit
 
 The secret key is primarily used for hashing passwords, and for security reasons is therefore not kept in the repo.  If you transfer a database with user information (such as from a full .sql dump of a database), you _must_ also transfer the `secretkeys.json` file to the new installation, or the password hashes will no longer work and user passwords will all have to be manually reset.
 
+### Log Files
+
+__ENM Topic Curation Toolkit Backend__ will not run if the expected log file is not present. To create the necessary log files, run
+
+```base
+sudo mkdir /var/log/django
+sudo touch /var/log/django/nyu.log
+sudo chmod 666 /var/log/django/nyu.log
+```
+
+If you would like to change the location or name of the log file, you can update the LOGGING dictionary in `nyu/production_settings.py`
+
 ## Importing Data
 
 There are two ways of getting batch data into the __ENM Topic Curation Toolkit Backend__:

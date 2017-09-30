@@ -215,6 +215,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#log-files" title="Log Files" class="md-nav__link">
+    Log Files
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -429,6 +436,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#log-files" title="Log Files" class="md-nav__link">
+    Log Files
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -504,6 +518,15 @@
 
 
 <p>The secret key is primarily used for hashing passwords, and for security reasons is therefore not kept in the repo.  If you transfer a database with user information (such as from a full .sql dump of a database), you <em>must</em> also transfer the <code>secretkeys.json</code> file to the new installation, or the password hashes will no longer work and user passwords will all have to be manually reset.</p>
+<h3 id="log-files">Log Files</h3>
+<p><strong>ENM Topic Curation Toolkit Backend</strong> will not run if the expected log file is not present. To create the necessary log files, run</p>
+<div class="codehilite"><pre><span></span>sudo mkdir /var/log/django
+sudo touch /var/log/django/nyu.log
+sudo chmod 666 /var/log/django/nyu.log
+</pre></div>
+
+
+<p>If you would like to change the location or name of the log file, you can update the LOGGING dictionary in <code>nyu/production_settings.py</code></p>
 <h2 id="importing-data">Importing Data</h2>
 <p>There are two ways of getting batch data into the <strong>ENM Topic Curation Toolkit Backend</strong>:</p>
 <ol>
